@@ -21,6 +21,11 @@ class App extends Component {
       board: createBoard(20,10),
     }
   }
+
+  /** EVENT HANDLERES */
+  handleClickTest = (e) => {
+
+  }
   render() {
     const { board } = this.state;
     return (
@@ -37,6 +42,7 @@ class App extends Component {
             ))
           ))}
         </div>
+        <div className="test-button" onClick={this.handleClickTest}> TEST BUTTON</div>
       </div>
     );
   }

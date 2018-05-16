@@ -1,13 +1,30 @@
 .App {
 	display: grid;
-
-}
-.App .app-title {
 	text-align: center;
+	align-items: center;
+	
 }
 .board {
 	margin: auto;
 	display: grid;
 	grid-template-columns: repeat(10, 30px);
 	grid-template-rows: repeat(20, 30px);
+	grid-gap: 2px;
+}
+
+.test-button {
+	margin: 10px auto;
+	height: 25px;
+	width: 150px;
+	border: 1px solid #222;
+	background-color: #EEE;
+	cursor: pointer;
+	user-select: none;
+
+}
+.test-button:hover {
+	background-color: #DDD;
+}
+.test-button:active {
+	padding-top: 2px;
 }
