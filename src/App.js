@@ -25,6 +25,11 @@ class App extends Component {
     const { board } = this.state;
     return (
       <div className="App">
+        <div className="app-header">
+          <div className="app-title">
+            <h1>Tetris</h1>
+          </div>
+        </div>
         <div className="board">
           { board.map( (row, rowIndex) => (
             row.map( (elem, columnIndex) => (

@@ -1,5 +1,13 @@
-.board {
+.App {
 	display: grid;
-	grid-template-columns: repeat(10, 50px);
-	grid-template-rows: repeat(20, 50px);
+
+}
+.App .app-title {
+	text-align: center;
+}
+.board {
+	margin: auto;
+	display: grid;
+	grid-template-columns: repeat(10, 30px);
+	grid-template-rows: repeat(20, 30px);
 }
