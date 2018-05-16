@@ -21,6 +21,19 @@ class Tetrimino {
 		}
 		return false;
 	}
+	/**
+	 * All 3 below
+	 * @return {array} new position for a move
+	 */
+	getLeftMove(){
+		return this.position.map( elem => elem.getLeft() );
+	}
+	getRightMove(){
+		return this.position.map( elem => elem.getRight() );
+	}
+	getDownMove(){
+		return this.position.map( elem => elem.getDown() );
+	}
 }
 
 export default Tetrimino;
