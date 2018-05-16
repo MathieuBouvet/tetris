@@ -6,17 +6,17 @@ class TetriminoT extends Tetrimino {
 		super();
 		this.type = "T";
 		/*this.position = [
+			new Simple2DPosition(-1,3),
 			new Simple2DPosition(-1,4),
+			new Simple2DPosition(-2,4),
 			new Simple2DPosition(-1,5),
-			new Simple2DPosition(-2,5),
-			new Simple2DPosition(-1,6),
 		];*/
 		//TEST POSITION
 		this.position = [
+			new Simple2DPosition(5,3),
 			new Simple2DPosition(5,4),
+			new Simple2DPosition(4,4),
 			new Simple2DPosition(5,5),
-			new Simple2DPosition(4,5),
-			new Simple2DPosition(5,6),
 		];
 	}
 	getRotationMapping(){
