@@ -1,8 +1,7 @@
 import Simple2DPosition from "./Simple2DPosition";
 
 class Tetrimino {
-	constructor(tetriminoType){
-		this.type = tetriminoType;
+	constructor(){
 		this.orientation = 0;
 		this.position = [];
 	}
