@@ -8,13 +8,13 @@ class Simple2DPosition {
 		return new Simple2DPosition(this.posX+xShift, this.posY+yShift);
 	}
 	getLeft(){
-		return this.getTranslation(-1,0);
+		return this.getTranslation(0,-1);
 	}
 	getRight(){
-		return this.getTranslation(1,0);
+		return this.getTranslation(0,1);
 	}
 	getDown(){
-		return this.getTranslation(0,1);
+		return this.getTranslation(1,0);
 	}
 }
 
