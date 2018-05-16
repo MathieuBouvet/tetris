@@ -5,10 +5,7 @@ class Simple2DPosition {
 	}
 
 	getTranslation(xShift, yShift){
-		return {
-			this.posX+xShift,
-			this.posY+yShift
-		}
+		return new Simple2DPosition(this.posX+xShift, this.posY+yShift);
 	}
 }
 
