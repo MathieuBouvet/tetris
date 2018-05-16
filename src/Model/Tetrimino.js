@@ -33,6 +33,46 @@ class Tetrimino {
 	getDownMove(){
 		return this.position.map( elem => elem.getDown() );
 	}
+
+	
+
+	rotateRight(){
+		this.position = this.getRightRotation();
+		this.orientation++;
+		if(this.orientation > 3){
+			this.orientation = 0;
+		}
+
+	}
+
+	rotateLeft(){
+		this.position = this.getLeftRotation();
+		this.orientation--;
+		if(this.orientation < 0){
+			this.orientation = 3;
+		}
+	}
+
+	getRightRotation(){
+		const rotationMapping = this.getRotationMapping()[this.orientation];
+		const result = this.position.map( (elem, index) => {
+			let [xShift, yShift] = rotationMapping[index];
+			return elem.getTranslation(xShift,yShift);
+		});
+		return result;
+	}
+	getLeftRotation(){
+		var orientation = this.orientation-1;
+		if(orientation < 0){
+			orientation = 3;
+		}
+		const rotationMapping = this.getRotationMapping()[orientation];
+		const result = this.position.map( (elem, index) => {
+			let [xShift, yShift] = rotationMapping[index];
+			return elem.getTranslation(-xShift,-yShift);
+		});
+		return result;
+	}
 }
 
 export default Tetrimino;
