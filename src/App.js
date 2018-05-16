@@ -3,6 +3,11 @@ import './App.css';
 
 import Cell from "./Cell";
 
+const boardSize = {
+  row: 10,
+  column: 20,
+}
+
 function createBoard(sizeFirst, sizeSecond) {
   var arr = [];
   for(var i=0 ; i<sizeFirst ; i++){
@@ -18,7 +23,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      board: createBoard(20,10),
+      board: createBoard(boardSize.column,boardSize.row),
     }
   }
 
