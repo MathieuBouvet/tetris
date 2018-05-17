@@ -80,6 +80,14 @@ class Tetrimino {
 		return result;
 	}
 
+	clone(){
+		let theClone = new Tetrimino(this.type);
+		theClone.position = this.position.map( (elem) => new Simple2DPosition(elem.posX,elem.posY) );
+		theClone.orientation = this.orientation;
+
+		return theClone;
+	}
+
 	static getConfigurationFor(tetriminoType){
 		return Tetrimino.configuration()[tetriminoType];
 	}
