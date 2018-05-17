@@ -44,7 +44,7 @@ class Tetrimino {
 	
 
 	applyRightRotation(rotationTransform){
-		this.position = rotationTransform;
+		this.applyPosition(rotationTransform);
 		this.orientation++;
 		if(this.orientation > 3){
 			this.orientation = 0;
@@ -52,11 +52,15 @@ class Tetrimino {
 
 	}
 	applyLeftRotation(rotationTransform){
-		this.position = rotationTransform;
+		this.applyPosition(rotationTransform);
 		this.orientation--;
 		if(this.orientation < 0){
 			this.orientation = 3;
 		}
+	}
+
+	applyPosition(position){
+		this.position = position;
 	}
 
 	getRightRotation(){
