@@ -94,6 +94,22 @@ class Tetrimino {
 		return theClone;
 	}
 
+	/**
+	 * retun the index of the rows the tetrimino is in sorted ascendently
+	 * @return {array} array of row index sorted ascendently
+	 */
+	getRowSpan(){
+		let rowSpan = [];
+		for(let i=0 ; i<this.position.length ; i++){
+			if(!rowSpan.includes(this.position[i].posX)){
+				rowSpan.push(this.position[i].posX);
+			}
+		}
+		return rowSpan.sort( (a,b) => (a-b) );
+	}
+
+	
+
 	static getConfigurationFor(tetriminoType){
 		return Tetrimino.configuration()[tetriminoType];
 	}
