@@ -32,6 +32,72 @@ class App extends Component {
   }
 
   /** EVENT HANDLERES */
+  handleClickTest1 = (e) => {
+    var newTetetrimino = this.state.tetrimino.clone();
+    const downMove = newTetetrimino.getDownMove();
+    const { isValid, status } = this.isPositionValid(downMove);
+    if(isValid){
+      newTetetrimino.applyPosition(downMove);
+      this.setState({
+        tetrimino: newTetetrimino,
+      });
+    }else if( status === "OVERLAPPING" || status === "OUT_VERTICALLY" ){
+      this.lockTetrimino();
+    }
+  }
+  handleClickTest2 = (e) => {
+    var newTetetrimino = this.state.tetrimino.clone();
+    const rotate = newTetetrimino.getRightRotation();
+    if(this.isPositionValid(rotate)["isValid"]){
+      newTetetrimino.applyRightRotation(rotate);
+      this.setState({
+        tetrimino: newTetetrimino,
+      });
+    }
+  }
+  handleClickTest3 = (e) => {
+    var newTetetrimino = this.state.tetrimino.clone();
+    const rotate = newTetetrimino.getLeftRotation();
+    if(this.isPositionValid(rotate)["isValid"]){
+      newTetetrimino.applyLeftRotation(rotate);
+      this.setState({
+        tetrimino: newTetetrimino,
+      });
+    }
+  }
+  handleClickTest4 = (e) => {
+    var newTetetrimino = this.state.tetrimino.clone();
+    const leftMovePosition = newTetetrimino.getLeftMove();
+    if(this.isPositionValid(leftMovePosition)["isValid"]){
+      newTetetrimino.applyPosition(leftMovePosition);
+      this.setState({
+        tetrimino: newTetetrimino,
+      });
+    }
+  }
+  handleClickTest5 = (e) => {
+    var newTetetrimino = this.state.tetrimino.clone();
+    const rightMovePosition = newTetetrimino.getRightMove();
+    if(this.isPositionValid(rightMovePosition)["isValid"]){
+      newTetetrimino.applyPosition(rightMovePosition);
+      this.setState({
+        tetrimino: newTetetrimino,
+      });
+    }
+  }
+  handleClickTest6 = (e) => {
+    const board = this.cloneBoard();
+    board[19] = ["J","J","J","J","J","empty","J","J","J","J"]
+    this.setState({
+      "board": board,
+    });
+  }
+  handleClickTest7 = (e) => {
+    this.runGame = setInterval(this.gravity, 1000);
+  }
+  handleClickTest8 = (e) =>{
+    clearInterval(this.runGame);
+  }
 
   /** LOGIC METHOD */
   gravity = () => {
@@ -214,8 +280,18 @@ class App extends Component {
                 <Cell key={rowIndex.toString()+columnIndex.toString()} blockType={elem} /> )
               ))
             ))
+          }
         </div>
-        <div className="test-button" onClick={this.handleClickTest}> TEST BUTTON</div>
+        <div className="test-button-container">
+          <div className="test-button" onClick={this.handleClickTest1}> DOWN</div>
+          <div className="test-button" onClick={this.handleClickTest4}> MOVE LEFT</div>
+          <div className="test-button" onClick={this.handleClickTest5}> MOVE RIGHT</div>
+          <div className="test-button" onClick={this.handleClickTest2}> ROTATE RIGHT</div>
+          <div className="test-button" onClick={this.handleClickTest3}> ROTATE LEFT</div>
+          <div className="test-button" onClick={this.handleClickTest6}> ADD BLOCKS</div>
+          <div className="test-button" onClick={this.handleClickTest7}> START</div>
+          <div className="test-button" onClick={this.handleClickTest8}> PAUSE</div>
+        </div>
       </div>
     );
   }
