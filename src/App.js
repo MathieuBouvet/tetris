@@ -34,57 +34,19 @@ class App extends Component {
 
   /** EVENT HANDLERES */
   handleClickTest1 = (e) => {
-    var newTetetrimino = this.state.tetrimino.clone();
-    const downMove = newTetetrimino.getDownMove();
-    const { isValid, status } = this.isPositionValid(downMove);
-    if(isValid){
-      newTetetrimino.applyPosition(downMove);
-      this.setState({
-        tetrimino: newTetetrimino,
-      });
-    }else if( status === "OVERLAPPING" || status === "OUT_VERTICALLY" ){
-      this.lockTetrimino();
-    }
+    this.moveDown();
   }
   handleClickTest2 = (e) => {
-    var newTetetrimino = this.state.tetrimino.clone();
-    const rotate = newTetetrimino.getRightRotation();
-    if(this.isPositionValid(rotate)["isValid"]){
-      newTetetrimino.applyRightRotation(rotate);
-      this.setState({
-        tetrimino: newTetetrimino,
-      });
-    }
+    this.rotateRight();
   }
   handleClickTest3 = (e) => {
-    var newTetetrimino = this.state.tetrimino.clone();
-    const rotate = newTetetrimino.getLeftRotation();
-    if(this.isPositionValid(rotate)["isValid"]){
-      newTetetrimino.applyLeftRotation(rotate);
-      this.setState({
-        tetrimino: newTetetrimino,
-      });
-    }
+    this.rotateLeft();
   }
   handleClickTest4 = (e) => {
-    var newTetetrimino = this.state.tetrimino.clone();
-    const leftMovePosition = newTetetrimino.getLeftMove();
-    if(this.isPositionValid(leftMovePosition)["isValid"]){
-      newTetetrimino.applyPosition(leftMovePosition);
-      this.setState({
-        tetrimino: newTetetrimino,
-      });
-    }
+    this.moveLeft();
   }
   handleClickTest5 = (e) => {
-    var newTetetrimino = this.state.tetrimino.clone();
-    const rightMovePosition = newTetetrimino.getRightMove();
-    if(this.isPositionValid(rightMovePosition)["isValid"]){
-      newTetetrimino.applyPosition(rightMovePosition);
-      this.setState({
-        tetrimino: newTetetrimino,
-      });
-    }
+    this.moveRight();
   }
   handleClickTest6 = (e) => {
     const board = this.cloneBoard();
