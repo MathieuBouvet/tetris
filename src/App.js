@@ -105,7 +105,7 @@ class App extends Component {
    * @return {isValid: Boolean, status: string} Object containing a boolean and additional info if position is not valid
    */
   isPositionValid(position){
-    //const { board } = this.state;
+    const { board } = this.state;
     for(let i=0; i<position.length ; i++){
       let { posX, posY } = position[i];
       try {
