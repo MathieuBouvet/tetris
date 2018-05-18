@@ -4,6 +4,7 @@ import './App.css';
 import Cell from "./Cell";
 
 import Tetrimino from "./Model/Tetrimino";
+import KeyInput from "./KeyInput";
 
 const boardSize = {
   row: 10,
@@ -97,6 +98,25 @@ class App extends Component {
   }
   handleClickTest8 = (e) =>{
     clearInterval(this.runGame);
+  }
+  keyDownHandler = (event, test) => {
+    switch(event.key){
+      case "ArrowDown":
+        this.moveDown();
+        break;
+      case "ArrowLeft":
+        this.moveLeft();
+        break;
+      case "ArrowRight":
+        this.moveRight();
+        break;
+      case "ArrowUp":
+        this.rotateLeft();
+        break;
+      case " ":
+        this.rotateRight();
+        break;
+    }
   }
 
   /** LOGIC METHOD */
@@ -261,6 +281,13 @@ class App extends Component {
       });
     }
   }
+  handleRefAttachement = (input) => {
+    this.domRefKeyInput = input;
+  }
+  handleKeyInputBlur = () => {
+    setTimeout(()=>(this.domRefKeyInput.focus()),0  );
+  }
+
   render() {
     const { board, tetrimino } = this.state;
     return (
@@ -291,6 +318,7 @@ class App extends Component {
           <div className="test-button" onClick={this.handleClickTest6}> ADD BLOCKS</div>
           <div className="test-button" onClick={this.handleClickTest7}> START</div>
           <div className="test-button" onClick={this.handleClickTest8}> PAUSE</div>
+          <KeyInput onKeyDown={this.keyDownHandler} attachRef={this.handleRefAttachement} onBlur={this.handleKeyInputBlur}/>
         </div>
       </div>
     );
