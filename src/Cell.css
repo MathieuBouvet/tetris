@@ -1,3 +1,26 @@
 .block {
-	background-color: red;
+	background-color: #b0bec5;
+}
+
+.block.L {
+	background-color: #e64a19;
+}
+
+.block.J {
+	background-color: #0d47a1;
+}
+.block.S {
+	background-color: #689f38;
+}
+.block.Z {
+	background-color: #d32f2f;
+}
+.block.T {
+	background-color: #7b1fa2;
+}
+.block.O {
+	background-color: #ffa000;
+}
+.block.I {
+	background-color: #0097a7;
 }
