@@ -1,19 +1,26 @@
 .App {
 	display: grid;
+	grid-template-areas: "head head"
+												"main-left main-right"
+												"foot foot";
 	text-align: center;
+	justify-items: center;
 	align-items: center;
 	
 }
+.app-header {
+	grid-area: head;
+}
 .board {
-	margin: auto;
+	grid-area: main-left;
 	display: grid;
 	grid-template-columns: repeat(10, 30px);
 	grid-template-rows: repeat(20, 30px);
-	grid-gap: 2px;
+	grid-gap: 0;
 }
 
 .test-button {
-	margin: 10px auto;
+	margin: 10px;
 	height: 25px;
 	width: 150px;
 	border: 1px solid #222;
