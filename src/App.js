@@ -3,6 +3,8 @@ import './App.css';
 
 import Cell from "./Cell";
 
+import Tetrimino from "./Model/Tetrimino";
+
 const boardSize = {
   row: 10,
   column: 20,
