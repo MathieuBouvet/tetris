@@ -196,7 +196,7 @@ class App extends Component {
     }
   }
   render() {
-    const { board } = this.state;
+    const { board, tetrimino } = this.state;
     return (
       <div className="App">
         <div className="app-header">
@@ -205,11 +205,15 @@ class App extends Component {
           </div>
         </div>
         <div className="board">
-          { board.map( (row, rowIndex) => (
-            row.map( (elem, columnIndex) => (
-              <Cell key={rowIndex.toString()+columnIndex.toString()} blockType={elem} />
+          {
+            board.map( (row, rowIndex) => (
+              row.map( (elem, columnIndex) => (
+                ( tetrimino.isPosition(rowIndex, columnIndex) ?
+                <Cell key={rowIndex.toString()+columnIndex.toString()} blockType={tetrimino.type} />
+                :
+                <Cell key={rowIndex.toString()+columnIndex.toString()} blockType={elem} /> )
+              ))
             ))
-          ))}
         </div>
         <div className="test-button" onClick={this.handleClickTest}> TEST BUTTON</div>
       </div>
