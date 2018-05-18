@@ -1,5 +1,7 @@
 import Simple2DPosition from "./Simple2DPosition";
 
+const tetriminoes = ["I","J","L","O","S","T","Z"];
+
 class Tetrimino {
 	
 	constructor(type){
@@ -196,6 +198,10 @@ class Tetrimino {
 				],
 			},
 		}
+	}
+	static getRandom(){
+		const type = tetriminoes[Math.floor(Math.random()*tetriminoes.length)];
+		return new Tetrimino(type);
 	}
 	
 }
