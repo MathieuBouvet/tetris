@@ -32,7 +32,11 @@ class App extends Component {
   }
 
   /** EVENT HANDLERES */
-  handleClickTest = (e) => {
+
+  /** LOGIC METHOD */
+  cloneBoard(){
+    return this.state.board.map( (elem) => elem.slice() );
+  }
 
   }
   render() {
