@@ -170,23 +170,25 @@ class App extends Component {
         board[lines[i]][j] = "empty";
       }
     }
-    // Move down above blocks
-    const startingIndex = lines[0]-1;
-    let lineEmpty = false;
-    // Loop through each row above, and stop if there is an empty line detected
-    for(let i=startingIndex ; i >= 0  && !lineEmpty; i--){
+    // Move down blocks
+    const startingIndex = lines[0];
+    let nbEmptyLines = 0;
+    // Loop through each row starting from the lowest
+    // stop when there is more empty line than line to remove plus one (we don't want to stop to soon...)
+    for(let i=startingIndex ; i >= 0  && nbEmptyLines<nbLines+1; i--){
       let nbEmptyBlock = 0;
       for(let j=0 ; j<boardSize.row ; j++){
         let currentBlock = board[i][j];
         if(currentBlock !== "empty"){
-          board[i+nbLines][j] = currentBlock;
+          // compute the down shift for a block, which is the number of line we've already removed
+          board[i+nbEmptyLines][j] = currentBlock;
           board[i][j] = "empty";
         }else{
           nbEmptyBlock++;
         }
       }
       if(nbEmptyBlock===boardSize.row){
-        lineEmpty = true;
+        nbEmptyLines++;
       }
     }
   }
