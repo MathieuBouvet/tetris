@@ -26,6 +26,8 @@ class App extends Component {
     super(props);
     this.state = {
       board: createBoard(boardSize.column,boardSize.row),
+      tetrimino: Tetrimino.getRandom(),
+      nextTetrimino: Tetrimino.getRandom(),
     }
   }
 
