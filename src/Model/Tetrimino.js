@@ -105,7 +105,7 @@ class Tetrimino {
 				rowSpan.push(this.position[i].posX);
 			}
 		}
-		return rowSpan.sort( (a,b) => (a-b) );
+		return rowSpan.sort( (a,b) => (b-a) );
 	}
 
 	
