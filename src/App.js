@@ -274,17 +274,17 @@ class App extends Component {
           }
         </div>
         <div className="test-button-container">
-          <div className="test-button" onClick={this.handleClickTest1}> DOWN</div>
-          <div className="test-button" onClick={this.handleClickTest4}> MOVE LEFT</div>
-          <div className="test-button" onClick={this.handleClickTest5}> MOVE RIGHT</div>
-          <div className="test-button" onClick={this.handleClickTest2}> ROTATE RIGHT</div>
-          <div className="test-button" onClick={this.handleClickTest3}> ROTATE LEFT</div>
           <div className="test-button" onClick={this.handleClickTest6}> ADD BLOCKS</div>
           <div className="test-button" onClick={this.handleClickTest7}> START</div>
           <div className="test-button" onClick={this.handleClickTest8}> PAUSE</div>
-          <KeyInput onKeyDown={this.keyDownHandler} attachRef={this.handleRefAttachement} onBlur={this.handleKeyInputBlur}/>
+          <KeyInput
+            onKeyDown={this.keyDownHandler}
+            attachRef={this.handleRefAttachement}
+            onBlur={this.handleKeyInputBlur}
+          />
         </div>
       </div>
+
     );
   }
 }
