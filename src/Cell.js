@@ -1,8 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
 import "./Cell.css";
 
-const Cell = ({blockType}) => (
-	<div className={`block  ${blockType}`}></div>
-);
+class Cell extends Component{
+	constructor(props){
+		super(props);
+	}
 
+	shouldComponentUpdate({blockType}){
+		if(blockType===this.props.blockType){
+			return false;
+		}
+		return true;
+	}
+
+	render(){
+		return (
+			<div className={`block  ${this.props.blockType}`}></div>
+		)
+	}
+}
 export default Cell;
