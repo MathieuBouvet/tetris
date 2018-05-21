@@ -260,9 +260,13 @@ class App extends Component {
     setTimeout(()=>(this.domRefKeyInput.focus()),0  );
   }
 
-  getLevel(){
+  getLevel(nbLines=-1){
     // max level is 10, 10 lines completed per level
-    return Math.min(Math.floor(this.state.nbLinesCompleted/10)+1,10);
+    if(nbLines === -1){
+      return Math.min(Math.floor(this.state.nbLinesCompleted/10)+1,10);
+    }else{
+      return Math.min(Math.floor(nbLines/10)+1,10);
+    }
   }
 
   getNewScore(nbLines){
