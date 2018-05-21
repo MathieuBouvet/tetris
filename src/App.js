@@ -6,6 +6,8 @@ import Cell from "./Cell";
 import Tetrimino from "./Model/Tetrimino";
 import KeyInput from "./KeyInput";
 
+import UpNext from "./UpNext";
+
 const boardSize = {
   row: 10,
   column: 20,
@@ -282,6 +284,7 @@ class App extends Component {
             attachRef={this.handleRefAttachement}
             onBlur={this.handleKeyInputBlur}
           />
+          <UpNext tetrimino={this.state.nextTetrimino} />
         </div>
       </div>
 
