@@ -26,7 +26,7 @@ function createBoard(sizeFirst, sizeSecond) {
   return arr; 
 }
 
-const baseScoringPerLine = [40,100,300,1200];
+const baseScoringPerLine = [0,40,100,300,1200];
 
 class App extends Component {
   constructor(props) {
