@@ -24,13 +24,17 @@ function createBoard(sizeFirst, sizeSecond) {
   return arr; 
 }
 
+const baseScoringPerLine = [40,100,300,1200];
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       board: createBoard(boardSize.column,boardSize.row),
-      tetrimino: Tetrimino.getRandom(),
+      tetrimino: new Tetrimino("I"),
       nextTetrimino: Tetrimino.getRandom(),
+      nbLinesCompleted: 0,
+      score: 0,
     }
   }
 
@@ -252,6 +256,15 @@ class App extends Component {
   }
   handleKeyInputBlur = () => {
     setTimeout(()=>(this.domRefKeyInput.focus()),0  );
+  }
+
+  getLevel(){
+    // max level is 10, 10 lines completed per level
+    return Math.min(Math.floor(this.state.nbLinesCompleted/10)+1,10);
+  }
+
+  getNewScore(nbLines){
+    return this.state.score + this.getLevel()*baseScoringPerLine[nbLines];
   }
 
   render() {
