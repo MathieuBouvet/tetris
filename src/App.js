@@ -64,7 +64,8 @@ class App extends Component {
     });
   }
   handleClickTest7 = (e) => {
-    this.runGame = setInterval(this.gravity, 1000);
+
+    this.runGame = setInterval(this.gravity, 500-(50*(this.getLevel()-1)));
   }
   handleClickTest8 = (e) =>{
     clearInterval(this.runGame);
