@@ -133,7 +133,7 @@ class App extends Component {
   }
 
   lockTetrimino(){
-    const { tetrimino, nextTetrimino } = this.state;
+    const { tetrimino, nextTetrimino, nbLinesCompleted } = this.state;
     let newBoard = this.cloneBoard();
     for(let i=0 ; i<tetrimino.position.length ; i++){
       const { posX, posY } = tetrimino.position[i];
@@ -141,14 +141,25 @@ class App extends Component {
     }
     const linesToDelete = (this.checkNewLines(tetrimino.getRowSpan(), newBoard));
     if(linesToDelete.length > 0){
-      this.deleteLines(linesToDelete, newBoard)
+      this.deleteLines(linesToDelete, newBoard);
+
+    }
+    const newNbLinesCompleted = nbLinesCompleted+linesToDelete.length;
+
+    if(this.getLevel() !== this.getLevel(newNbLinesCompleted)){
+      clearInterval(this.runGame );
+      this.runGame = setInterval(this.gravity, this.getLevel(newNbLinesCompleted));
     }
 
     this.setState({
       board: newBoard,
       tetrimino: nextTetrimino,
       nextTetrimino: Tetrimino.getRandom(),
+      score: this.getNewScore(linesToDelete.length),
+      nbLinesCompleted: newNbLinesCompleted,
     });
+
+
 
   }
   isLineComplete(line){
