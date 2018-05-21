@@ -1,0 +1,5 @@
+.up-next {
+	display: grid;
+	grid-template-rows: repeat(4, 30px);
+	grid-template-columns: repeat(6, 30px);
+}
