@@ -7,6 +7,8 @@ import Tetrimino from "./Model/Tetrimino";
 import KeyInput from "./KeyInput";
 
 import UpNext from "./UpNext";
+import ScoreDisplay from "./ScoreDisplay";
+import LevelDisplay from "./LevelDisplay";
 
 const boardSize = {
   row: 10,
@@ -289,6 +291,8 @@ class App extends Component {
           }
         </div>
         <div className="test-button-container">
+          <ScoreDisplay score={this.state.score} />
+          <LevelDisplay level={this.getLevel()} />
           <div className="test-button" onClick={this.handleClickTest6}> ADD BLOCKS</div>
           <div className="test-button" onClick={this.handleClickTest7}> START</div>
           <div className="test-button" onClick={this.handleClickTest8}> PAUSE</div>
