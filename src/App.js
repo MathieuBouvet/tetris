@@ -171,7 +171,7 @@ class App extends Component {
 
     if(this.getLevel() !== this.getLevel(newNbLinesCompleted)){
       clearInterval(this.runGame );
-      this.runGame = setInterval(this.gravity, this.getLevel(newNbLinesCompleted));
+      this.runGame = setInterval(this.gravity, 500-(50*(this.getLevel(newNbLinesCompleted)-1)));
     }
 
     this.setState({
