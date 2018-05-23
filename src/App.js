@@ -136,10 +136,32 @@ class App extends Component {
   lockTetrimino(){
     const { tetrimino, nextTetrimino, nbLinesCompleted } = this.state;
     let newBoard = this.cloneBoard();
-    for(let i=0 ; i<tetrimino.position.length ; i++){
-      const { posX, posY } = tetrimino.position[i];
-      newBoard[posX][posY] = tetrimino.type;
+    try{
+      for(let i=0 ; i<tetrimino.position.length ; i++){
+        const { posX, posY } = tetrimino.position[i];
+        newBoard[posX][posY] = tetrimino.type;
+      }
+    }catch(err){
+      clearInterval(this.runGame);
+      let feedback = "mouai -_- recommence ;p";
+      if(this.state.score >= 2000 ){
+        feedback = "pas mal, mais tu peux mieux faire Natty... ¯\\_(ツ)_/¯";
+      }
+      if(this.state.score >= 5000){
+        feedback = "ça va, ça passe (ᵔᴥᵔ)";
+      }
+      if(this.state.score >= 8000){
+        feedback = "Hey! bien Natty ( ͡ᵔ ͜ʖ ͡ᵔ )";
+      }
+      if(this.state.score >= 10000){
+        feedback = "franchement bravo (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)";
+      }
+      if(this.state.score >= 15000){
+        feedback = " \\ (•◡•) / \nHooray \n\\ (•◡•) /\nMagnifique\n \\ (•◡•) / \nParfait\n \\ (•◡•) / \nNATTY !!!!";
+      }
+      alert("perdu \n score : "+this.state.score+" "+feedback);
     }
+
     const linesToDelete = (this.checkNewLines(tetrimino.getRowSpan(), newBoard));
     if(linesToDelete.length > 0){
       this.deleteLines(linesToDelete, newBoard);
