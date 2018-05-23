@@ -33,7 +33,7 @@ class App extends Component {
     super(props);
     this.state = {
       board: createBoard(boardSize.column,boardSize.row),
-      tetrimino: new Tetrimino("I"),
+      tetrimino: Tetrimino.getRandom(),
       nextTetrimino: Tetrimino.getRandom(),
       nbLinesCompleted: 0,
       score: 0,
