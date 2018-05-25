@@ -21,6 +21,7 @@ const gameStateEnum = {
   RUNNING: 1,
   PAUSED: 2,
   STARTING: 3,
+  RESUMING: 4,
 }
 
 function createBoard(sizeFirst, sizeSecond) {
@@ -110,9 +111,19 @@ class App extends Component {
   }
 
   onStartClickHandler = () => {
-    this.setState({
-      gameState: gameStateEnum.STARTING,
-    });
+    if(this.state.gameState === gameStateEnum.BEGIN){
+      this.setState({
+        gameState: gameStateEnum.STARTING,
+      });
+    }
+  }
+
+  onResumeClickHandler = () => {
+    if(this.state.gameState === gameStateEnum.PAUSED){
+      this.setState({
+        gameState: gameStateEnum.RESUMING,
+      });
+    }
   }
 
   start = () => {
@@ -123,7 +134,7 @@ class App extends Component {
   }
 
   /** LOGIC METHOD */
-  run(){
+  run = () => {
     this.runGame = setInterval(this.gravity, 500-(50*(this.getLevel()-1)));
     this.setState({
       gameState: gameStateEnum.RUNNING,
@@ -375,6 +386,7 @@ class App extends Component {
         </div>
         <div className="board">
           { gameState===gameStateEnum.STARTING && <Countdown onFinish={this.start} /> }
+          { gameState===gameStateEnum.RESUMING && <Countdown onFinish={this.run} /> }
           {
             board.map( (row, rowIndex) => (
               row.map( (elem, columnIndex) => (
@@ -390,7 +402,7 @@ class App extends Component {
           <ScoreDisplay score={this.state.score} />
           <LevelDisplay level={this.getLevel()} />
           <div className="test-button" onClick={this.handleClickTest6}> ADD BLOCKS</div>
-          <div className="test-button" onClick={this.onStartClickHandler}> START</div>
+          <div className="test-button" onClick={gameState===gameStateEnum.PAUSED ? this.onResumeClickHandler : this.onStartClickHandler}> START</div>
           <div className="test-button" onClick={this.handleClickTest8}> PAUSE</div>
           <KeyInput
             onKeyDown={this.keyDownHandler}
