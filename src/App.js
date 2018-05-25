@@ -79,11 +79,10 @@ class App extends Component {
     });
   }
   handleClickTest7 = (e) => {
-
-    
+    this.run();
   }
   handleClickTest8 = (e) =>{
-    clearInterval(this.runGame);
+    this.pause();
   }
   keyDownHandler = (event, test) => {
     switch(event.key){
