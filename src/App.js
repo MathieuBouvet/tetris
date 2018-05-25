@@ -44,6 +44,7 @@ class App extends Component {
       nextTetrimino: this.getTetriminoFromBag(),
       nbLinesCompleted: 0,
       score: 0,
+      gameState: gameState.BEGIN,
     }
   }
 
@@ -79,7 +80,7 @@ class App extends Component {
   }
   handleClickTest7 = (e) => {
 
-    this.runGame = setInterval(this.gravity, 500-(50*(this.getLevel()-1)));
+    
   }
   handleClickTest8 = (e) =>{
     clearInterval(this.runGame);
@@ -105,6 +106,20 @@ class App extends Component {
   }
 
   /** LOGIC METHOD */
+  run(){
+    this.runGame = setInterval(this.gravity, 500-(50*(this.getLevel()-1)));
+    this.setState({
+      gameState: gameState.RUNNING,
+    });
+  }
+  pause(){
+    if(this.state.gameState === gameState.RUNNING){
+      clearInterval(this.runGame);
+      this.setState({
+        gameState: gameState.PAUSED,
+      });
+    }
+  }
   getTetriminoFromBag(){
     if(this.tetriminoBag.length === 0){
       this.tetriminoBag = Tetrimino.getBag();
