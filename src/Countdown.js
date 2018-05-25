@@ -14,7 +14,7 @@ class Countdown extends Component {
 			this.setState({
 				count: --count,
 			});
-			if(count <= 0){
+			if(count < 0){
 				clearInterval(this.countingDown);
 				this.props.onFinish();
 			}
