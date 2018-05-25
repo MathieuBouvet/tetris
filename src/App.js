@@ -9,13 +9,14 @@ import KeyInput from "./KeyInput";
 import UpNext from "./UpNext";
 import ScoreDisplay from "./ScoreDisplay";
 import LevelDisplay from "./LevelDisplay";
+import Countdown from "./Countdown";
 
 const boardSize = {
   row: 10,
   column: 20,
 }
 
-const gameState = {
+const gameStateEnum = {
   BEGIN: 0,
   RUNNING: 1,
   PAUSED: 2,
@@ -44,7 +45,7 @@ class App extends Component {
       nextTetrimino: this.getTetriminoFromBag(),
       nbLinesCompleted: 0,
       score: 0,
-      gameState: gameState.BEGIN,
+      gameState: gameStateEnum.BEGIN,
     }
   }
 
@@ -85,7 +86,7 @@ class App extends Component {
     this.pause();
   }
   keyDownHandler = (event, test) => {
-    if(this.state.gameState === gameState.RUNNING){
+    if(this.state.gameState === gameStateEnum.RUNNING){
       switch(event.key){
       case "ArrowDown":
         this.moveDown();
@@ -110,14 +111,14 @@ class App extends Component {
   run(){
     this.runGame = setInterval(this.gravity, 500-(50*(this.getLevel()-1)));
     this.setState({
-      gameState: gameState.RUNNING,
+      gameState: gameStateEnum.RUNNING,
     });
   }
   pause(){
-    if(this.state.gameState === gameState.RUNNING){
+    if(this.state.gameState === gameStateEnum.RUNNING){
       clearInterval(this.runGame);
       this.setState({
-        gameState: gameState.PAUSED,
+        gameState: gameStateEnum.PAUSED,
       });
     }
   }
@@ -180,7 +181,7 @@ class App extends Component {
     }catch(err){
       clearInterval(this.runGame);
       this.setState({
-        gameState: gameState.BEGIN,
+        gameState: gameStateEnum.BEGIN,
       });
       let feedback = "mouai -_- recommence ;p";
       if(this.state.score >= 2000 ){
