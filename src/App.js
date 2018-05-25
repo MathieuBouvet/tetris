@@ -15,6 +15,12 @@ const boardSize = {
   column: 20,
 }
 
+const gameState = {
+  BEGIN: 0,
+  RUNNING: 1,
+  PAUSED: 2,
+}
+
 function createBoard(sizeFirst, sizeSecond) {
   var arr = [];
   for(var i=0 ; i<sizeFirst ; i++){
