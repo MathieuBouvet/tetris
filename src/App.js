@@ -85,7 +85,8 @@ class App extends Component {
     this.pause();
   }
   keyDownHandler = (event, test) => {
-    switch(event.key){
+    if(this.state.gameState === gameState.RUNNING){
+      switch(event.key){
       case "ArrowDown":
         this.moveDown();
         break;
@@ -101,6 +102,7 @@ class App extends Component {
       case " ":
         this.rotateRight();
         break;
+      }
     }
   }
 
