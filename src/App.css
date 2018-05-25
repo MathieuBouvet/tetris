@@ -13,10 +13,21 @@
 }
 .board {
 	grid-area: main-left;
+	
+	/* For stopping the blurry edges */
+	overflow: hidden;
+	
+	position: relative;
+}
+.cell-wrapper {
 	display: grid;
 	grid-template-columns: repeat(10, 30px);
 	grid-template-rows: repeat(20, 30px);
 	grid-gap: 0;
+}
+
+.cell-wrapper.blured {
+	filter: blur(25px);
 }
 
 .test-button {
