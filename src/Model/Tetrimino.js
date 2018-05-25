@@ -1,5 +1,7 @@
 import Simple2DPosition from "./Simple2DPosition";
 
+import shuffle from "fisher-yates";
+
 const tetriminoes = ["I","J","L","O","S","T","Z"];
 
 class Tetrimino {
@@ -218,6 +220,10 @@ class Tetrimino {
 	static getRandom(){
 		const type = tetriminoes[Math.floor(Math.random()*tetriminoes.length)];
 		return new Tetrimino(type);
+	}
+
+	static getBag(){
+		return shuffle(tetriminoes);
 	}
 	
 }
