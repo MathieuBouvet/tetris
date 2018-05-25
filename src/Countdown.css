@@ -1,0 +1,9 @@
+.countdown {
+	position: absolute;
+	grid-row: 1 / span 20;
+	grid-column: 1 / span 10;
+	align-self: center;
+	justify-self: center;
+	font-size: 5em;
+	color: #222;
+}
