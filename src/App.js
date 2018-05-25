@@ -20,6 +20,7 @@ const gameStateEnum = {
   BEGIN: 0,
   RUNNING: 1,
   PAUSED: 2,
+  STARTING: 3,
 }
 
 function createBoard(sizeFirst, sizeSecond) {
@@ -39,10 +40,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.tetriminoBag = Tetrimino.getBag();
+    const startingTetrimino = this.getTetriminoFromBag();
     this.state = {
       board: createBoard(boardSize.column,boardSize.row),
-      tetrimino: this.getTetriminoFromBag(),
-      nextTetrimino: this.getTetriminoFromBag(),
+      tetrimino: startingTetrimino,
+      nextTetrimino: startingTetrimino,
       nbLinesCompleted: 0,
       score: 0,
       gameState: gameStateEnum.BEGIN,
@@ -105,6 +107,19 @@ class App extends Component {
         break;
       }
     }
+  }
+
+  onStartClickHandler = () => {
+    this.setState({
+      gameState: gameStateEnum.STARTING,
+    });
+  }
+
+  start = () => {
+    this.setState({
+      nextTetrimino: this.getTetriminoFromBag(),
+    });
+    this.run();
   }
 
   /** LOGIC METHOD */
@@ -350,7 +365,7 @@ class App extends Component {
   }
 
   render() {
-    const { board, tetrimino } = this.state;
+    const { board, tetrimino, gameState } = this.state;
     return (
       <div className="App">
         <div className="app-header">
@@ -359,6 +374,7 @@ class App extends Component {
           </div>
         </div>
         <div className="board">
+          { gameState===gameStateEnum.STARTING && <Countdown onFinish={this.start} /> }
           {
             board.map( (row, rowIndex) => (
               row.map( (elem, columnIndex) => (
@@ -374,7 +390,7 @@ class App extends Component {
           <ScoreDisplay score={this.state.score} />
           <LevelDisplay level={this.getLevel()} />
           <div className="test-button" onClick={this.handleClickTest6}> ADD BLOCKS</div>
-          <div className="test-button" onClick={this.handleClickTest7}> START</div>
+          <div className="test-button" onClick={this.onStartClickHandler}> START</div>
           <div className="test-button" onClick={this.handleClickTest8}> PAUSE</div>
           <KeyInput
             onKeyDown={this.keyDownHandler}
