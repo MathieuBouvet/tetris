@@ -31,10 +31,11 @@ const baseScoringPerLine = [0,40,100,300,1200];
 class App extends Component {
   constructor(props) {
     super(props);
+    this.tetriminoBag = Tetrimino.getBag();
     this.state = {
       board: createBoard(boardSize.column,boardSize.row),
-      tetrimino: Tetrimino.getRandom(),
-      nextTetrimino: Tetrimino.getRandom(),
+      tetrimino: this.getTetriminoFromBag(),
+      nextTetrimino: this.getTetriminoFromBag(),
       nbLinesCompleted: 0,
       score: 0,
     }
@@ -98,6 +99,12 @@ class App extends Component {
   }
 
   /** LOGIC METHOD */
+  getTetriminoFromBag(){
+    if(this.tetriminoBag.length === 0){
+      this.tetriminoBag = Tetrimino.getBag();
+    }
+    return new Tetrimino(this.tetriminoBag.pop());
+  }
   gravity = () => {
     var newTetetrimino = this.state.tetrimino.clone();
     const downMove = newTetetrimino.getDownMove();
@@ -184,7 +191,7 @@ class App extends Component {
     this.setState({
       board: newBoard,
       tetrimino: nextTetrimino,
-      nextTetrimino: Tetrimino.getRandom(),
+      nextTetrimino: this.getTetriminoFromBag(),
       score: this.getNewScore(linesToDelete.length),
       nbLinesCompleted: newNbLinesCompleted,
     });
