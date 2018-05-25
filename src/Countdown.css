@@ -1,9 +1,15 @@
 .countdown {
 	position: absolute;
-	grid-row: 1 / span 20;
-	grid-column: 1 / span 10;
-	align-self: center;
-	justify-self: center;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	font-size: 5em;
 	color: #222;
 }
