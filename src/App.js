@@ -10,6 +10,7 @@ import UpNext from "./UpNext";
 import ScoreDisplay from "./ScoreDisplay";
 import LevelDisplay from "./LevelDisplay";
 import Countdown from "./Countdown";
+import Pause from "./Pause";
 
 const boardSize = {
   row: 10,
@@ -387,16 +388,19 @@ class App extends Component {
         <div className="board">
           { gameState===gameStateEnum.STARTING && <Countdown onFinish={this.start} /> }
           { gameState===gameStateEnum.RESUMING && <Countdown onFinish={this.run} /> }
-          {
-            board.map( (row, rowIndex) => (
-              row.map( (elem, columnIndex) => (
-                ( tetrimino.isPosition(rowIndex, columnIndex) ?
-                <Cell key={rowIndex.toString()+columnIndex.toString()} blockType={tetrimino.type} />
-                :
-                <Cell key={rowIndex.toString()+columnIndex.toString()} blockType={elem} /> )
+          { gameState===gameStateEnum.PAUSED && <Pause /> }
+          <div className={`cell-wrapper ${gameState===gameStateEnum.PAUSED ? "blured" : ""}`}>
+            {
+              board.map( (row, rowIndex) => (
+                row.map( (elem, columnIndex) => (
+                  ( tetrimino.isPosition(rowIndex, columnIndex) ?
+                  <Cell key={rowIndex.toString()+columnIndex.toString()} blockType={tetrimino.type} />
+                  :
+                  <Cell key={rowIndex.toString()+columnIndex.toString()} blockType={elem} /> )
+                ))
               ))
-            ))
-          }
+            }
+          </div>
         </div>
         <div className="test-button-container">
           <ScoreDisplay score={this.state.score} />
