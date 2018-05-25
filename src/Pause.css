@@ -1,0 +1,42 @@
+.pause {
+	color: #222;
+	font-size: 3em;
+	opacity: 1;
+
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 5000;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	animation: blinker 1s linear infinite;
+	
+
+}
+
+
+
+@keyframes blinker {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 1;
+	}
+	51%{
+		opacity: 0;
+	}
+	99% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+	
+}
+
