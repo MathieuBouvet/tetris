@@ -179,6 +179,9 @@ class App extends Component {
       }
     }catch(err){
       clearInterval(this.runGame);
+      this.setState({
+        gameState: gameState.BEGIN,
+      });
       let feedback = "mouai -_- recommence ;p";
       if(this.state.score >= 2000 ){
         feedback = "pas mal, mais tu peux mieux faire Natty... ¯\\_(ツ)_/¯";
@@ -196,6 +199,7 @@ class App extends Component {
         feedback = " \\ (•◡•) / \nHooray \n\\ (•◡•) /\nMagnifique\n \\ (•◡•) / \nParfait\n \\ (•◡•) / \nNATTY !!!!";
       }
       alert("perdu \n score : "+this.state.score+" "+feedback);
+      return;
     }
 
     const linesToDelete = (this.checkNewLines(tetrimino.getRowSpan(), newBoard));
@@ -205,6 +209,7 @@ class App extends Component {
     }
     const newNbLinesCompleted = nbLinesCompleted+linesToDelete.length;
 
+    // Set new speed of the game if level has changed
     if(this.getLevel() !== this.getLevel(newNbLinesCompleted)){
       clearInterval(this.runGame );
       this.runGame = setInterval(this.gravity, 500-(50*(this.getLevel(newNbLinesCompleted)-1)));
