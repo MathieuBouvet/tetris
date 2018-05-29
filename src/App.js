@@ -378,6 +378,7 @@ class App extends Component {
 
   render() {
     const { board, tetrimino, gameState } = this.state;
+    setTimeout( () =>( this.domRefKeyInput.focus() ),0);
     return (
       <div className="App">
         <div className="app-header">
