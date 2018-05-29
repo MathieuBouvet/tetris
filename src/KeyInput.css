@@ -1,0 +1,10 @@
+.key-input {
+	/* display: none; */
+	margin: 0;
+	border: none;
+	background-color: transparent;
+	resize: none;
+	height: 0;
+
+	position: absolute;
+}

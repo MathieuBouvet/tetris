@@ -1,0 +1,15 @@
+.score-display {
+
+	display: flex;
+	justify-content: space-between;
+
+
+	font-size: 4vh;
+
+	text-shadow: 2px 2px 1px #000;
+
+
+}
+.score-display-value {
+	font-size: 5vh;
+}

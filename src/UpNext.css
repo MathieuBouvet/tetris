@@ -1,5 +1,7 @@
 .up-next {
 	display: grid;
-	grid-template-rows: repeat(4, 30px);
-	grid-template-columns: repeat(6, 30px);
+	justify-content: center;
+	
+	grid-template-rows: repeat(4, minmax(1vh,3.5vh));
+	grid-template-columns: repeat(6, minmax(1vh,3.5vh));
 }

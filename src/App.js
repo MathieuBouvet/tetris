@@ -402,10 +402,10 @@ class App extends Component {
             }
           </div>
         </div>
-        <div className="test-button-container">
-          <ScoreDisplay score={this.state.score} />
+        <div className="infos-container">
           <LevelDisplay level={this.getLevel()} />
-          <div className="test-button" onClick={this.handleClickTest6}> ADD BLOCKS</div>
+          <ScoreDisplay score={this.state.score} />
+          {/*<div className="test-button" onClick={this.handleClickTest6}> ADD BLOCKS</div>*/}
           <div className="test-button" onClick={gameState===gameStateEnum.PAUSED ? this.onResumeClickHandler : this.onStartClickHandler}> START</div>
           <div className="test-button" onClick={this.handleClickTest8}> PAUSE</div>
           <KeyInput

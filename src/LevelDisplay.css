@@ -1,0 +1,11 @@
+.level-display {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 4vh;
+
+	text-shadow: 2px 2px 1px #000;
+}
+.level-display-value {
+	font-size: 5vh
+}

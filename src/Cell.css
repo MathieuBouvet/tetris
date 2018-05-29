@@ -1,5 +1,6 @@
 .block {
-	background-color: #b0bec5;
+	background-color: #ffdc79;
+	box-shadow: 0 0 2px inset rgba(34,34,34,1);
 }
 
 .block.L {
