@@ -10,6 +10,7 @@
 
 	--infos-container-width: calc(var(--board-block-size) * var(--board-column-num));
 	--infos-container-padding: 3vh;
+
 }
 h1 {
 	margin: 0;
@@ -38,7 +39,7 @@ h1 {
 	background-color: #222;
 	color: rgb(--app-main-color);
 
-	
+	font-family: 'Luckiest Guy';
 
 }
 /* .app-header {
@@ -74,10 +75,12 @@ h1 {
 
 	position: relative;
 	overflow: hidden;
+
+	color: #EEE;
+
 }
 .app-header > * {
 	z-index: 0;
-	color: #EEE;
 }
 .app-header:before {
 	content: "";
