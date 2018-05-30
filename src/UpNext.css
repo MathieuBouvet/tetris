@@ -1,7 +1,15 @@
 .up-next {
+	--up-next-width: calc(var(--infos-container-width) - (2 * var(--infos-container-padding)));
 	display: grid;
 	justify-content: center;
+
 	
-	grid-template-rows: repeat(4, minmax(1vh,3.5vh));
-	grid-template-columns: repeat(6, minmax(1vh,3.5vh));
+	grid-template-rows: repeat(4, calc(var(--up-next-width)/6));
+	grid-template-columns: repeat(6, calc(var(--up-next-width)/6));
+
+	border-radius: 5px;
+	overflow: hidden;
+
+	/* margin-top: auto; */
 }
+

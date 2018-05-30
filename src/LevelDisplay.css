@@ -1,7 +1,7 @@
 .level-display {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-end;
 	font-size: 4vh;
 
 	text-shadow: 2px 2px 1px #000;

@@ -3,6 +3,13 @@
 	--app-header-color : 34, 34, 34;
 
 	--app-bg: url("./tetris4.png");
+
+	--board-block-size: 3.5vh;
+	--board-column-num: 10;
+	--board-row-num: 20;
+
+	--infos-container-width: calc(var(--board-block-size) * var(--board-column-num));
+	--infos-container-padding: 3vh;
 }
 h1 {
 	margin: 0;
@@ -15,7 +22,7 @@ h1 {
 												"main-left main-right"
 												"foot foot";
 
-	grid-template-rows: 100px auto 50px;
+	grid-template-rows: 15% auto ;
 	grid-column-gap: 75px;
 	text-align: center;
 	justify-content: stretch;
@@ -109,8 +116,8 @@ h1 {
 }
 .cell-wrapper {
 	display: grid;
-	grid-template-columns: repeat(10, 3.5vh);
-	grid-template-rows: repeat(20, 3.5vh);
+	grid-template-columns: repeat(var(--board-column-num), var(--board-block-size));
+	grid-template-rows: repeat(var(--board-row-num), var(--board-block-size));
 	grid-gap: 0;
 	
 
@@ -145,7 +152,7 @@ h1 {
 	position: relative;
 	overflow: hidden;
 
-	padding: 2vh;
+	padding: var(--infos-container-padding);
 
 	grid-area: main-right;
 	justify-self: left;
@@ -155,8 +162,8 @@ h1 {
 	justify-content: space-between;
 	align-items: stretch;
 
-	height: calc(20*3.5vh);
-	width: calc(10*3.5vh);
+	/* height: calc(20*3.5vh); */
+	width: var(--infos-container-width);
 	/* background-color: #EEE; */
 	color: #DDD;
 
