@@ -55,38 +55,6 @@ class App extends Component {
   }
 
   /** EVENT HANDLERES */
-  handleClickTest1 = (e) => {
-    this.moveDown();
-  }
-  handleClickTest2 = (e) => {
-    this.rotateRight();
-  }
-  handleClickTest3 = (e) => {
-    this.rotateLeft();
-  }
-  handleClickTest4 = (e) => {
-    this.moveLeft();
-  }
-  handleClickTest5 = (e) => {
-    this.moveRight();
-  }
-  handleClickTest6 = (e) => {
-    const board = this.cloneBoard();
-    const emp = "empty";
-    board[13] = [emp,emp,emp,emp,emp,emp,emp,emp,emp,emp];
-    board[14] = [emp,"L",emp,emp,emp,emp,"L",emp,emp,emp];
-    board[15] = [emp,"L",emp,emp,emp,emp,"L","L",emp,emp];
-    board[16] = ["J","J","J","J",emp,"J","J","J","J","J"];
-    board[17] = ["J","J",emp,"J",emp,"J","J","J","J","J"];
-    board[18] = ["J","J","J","J",emp,"J","J","J","J",emp];
-    board[19] = ["J","J","J","J",emp,"J","J","J","J","J"];
-    this.setState({
-      "board": board,
-    });
-  }
-  handleClickTest7 = (e) => {
-    this.run();
-  }
   handleClickPause = (e) =>{
     this.pause();
   }
