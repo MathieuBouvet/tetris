@@ -51,6 +51,7 @@ class App extends Component {
       nbLinesCompleted: 0,
       score: 0,
       gameState: gameStateEnum.BEGIN,
+      linesToDelete: [],
     }
   }
 
@@ -125,6 +126,15 @@ class App extends Component {
     return new Tetrimino(this.tetriminoBag.pop());
   }
   gravity = () => {
+    if(this.state.linesToDelete.length > 0){
+      let newBoard = this.cloneBoard();
+      const { linesToDelete } = this.state;
+      this.deleteLines(linesToDelete, newBoard);
+      this.setState({
+        board: newBoard,
+        linesToDelete: [],
+      });
+    }
     var newTetetrimino = this.state.tetrimino.clone();
     const downMove = newTetetrimino.getDownMove();
     const { isValid, status } = this.isPositionValid(downMove);
@@ -200,10 +210,6 @@ class App extends Component {
     }
 
     const linesToDelete = (this.checkNewLines(tetrimino.getRowSpan(), newBoard));
-    if(linesToDelete.length > 0){
-      this.deleteLines(linesToDelete, newBoard);
-
-    }
     const newNbLinesCompleted = nbLinesCompleted+linesToDelete.length;
 
     // Set new speed of the game if level has changed
@@ -212,13 +218,16 @@ class App extends Component {
       this.runGame = setInterval(this.gravity, 500-(50*(this.getLevel(newNbLinesCompleted)-1)));
     }
 
+    // Add the linesTODelete to the state, they will be deleted during the next game iteration
     this.setState({
-      board: newBoard,
       tetrimino: nextTetrimino,
       nextTetrimino: this.getTetriminoFromBag(),
       score: this.getNewScore(linesToDelete.length),
       nbLinesCompleted: newNbLinesCompleted,
+      board: newBoard,
+      linesToDelete: linesToDelete,
     });
+
 
 
 
@@ -372,9 +381,9 @@ class App extends Component {
               board.map( (row, rowIndex) => (
                 row.map( (elem, columnIndex) => (
                   ( tetrimino.isPosition(rowIndex, columnIndex) ?
-                  <Cell key={rowIndex.toString()+columnIndex.toString()} blockType={tetrimino.type} />
+                  <Cell key={rowIndex.toString()+columnIndex.toString()} blockType={tetrimino.type} flash={this.state.linesToDelete.includes(rowIndex)}/>
                   :
-                  <Cell key={rowIndex.toString()+columnIndex.toString()} blockType={elem} /> )
+                  <Cell key={rowIndex.toString()+columnIndex.toString()} blockType={elem} flash={this.state.linesToDelete.includes(rowIndex)} /> )
                 ))
               ))
             }
@@ -392,6 +401,7 @@ class App extends Component {
           <UpNext tetrimino={this.state.nextTetrimino} />
           {button}
         </div>
+        
       </div>
 
     );

@@ -26,3 +26,17 @@
 .block.I {
 	background-color: #0097a7;
 }
+.block.flash {
+	animation: flash-yellow 0.25s linear alternate infinite;
+
+}
+
+@keyframes flash-yellow{
+	0% {
+		box-shadow: none;
+	}
+	100% {
+		background-color: yellow;
+		box-shadow: 0 0 5px 10px rgba(255,255,0,0.3);
+	}
+}

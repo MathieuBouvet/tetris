@@ -3,8 +3,8 @@ import "./Cell.css";
 
 class Cell extends Component{
 
-	shouldComponentUpdate({blockType}){
-		if(blockType===this.props.blockType){
+	shouldComponentUpdate({blockType, flash=false}){
+		if(blockType===this.props.blockType && flash===this.props.flash){
 			return false;
 		}
 		return true;
@@ -12,7 +12,7 @@ class Cell extends Component{
 
 	render(){
 		return (
-			<div className={`block  ${this.props.blockType}`}></div>
+			<div className={`block  ${this.props.blockType} ${this.props.flash ? "flash" : ""}`}></div>
 		)
 	}
 }
