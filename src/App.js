@@ -11,6 +11,7 @@ import ScoreDisplay from "./ScoreDisplay";
 import LevelDisplay from "./LevelDisplay";
 import Countdown from "./Countdown";
 import Pause from "./Pause";
+import Button from "./Button";
 
 const boardSize = {
   row: 10,
@@ -86,7 +87,7 @@ class App extends Component {
   handleClickTest7 = (e) => {
     this.run();
   }
-  handleClickTest8 = (e) =>{
+  handleClickPause = (e) =>{
     this.pause();
   }
   keyDownHandler = (event, test) => {
@@ -379,6 +380,14 @@ class App extends Component {
   render() {
     const { board, tetrimino, gameState } = this.state;
     setTimeout( () =>( this.domRefKeyInput.focus() ),0);
+    let button = <Button type="btn-start" onClick={this.onStartClickHandler}> Start </Button>;
+    if(gameState === gameStateEnum.PAUSED){
+      button = <Button type="btn-start" onClick={this.onResumeClickHandler}> Reprendre </Button>;
+    }else if(gameState === gameStateEnum.RUNNING){
+      button = <Button type="btn-pause" onClick={this.handleClickPause}> Pause </Button>;
+    }else if(gameState !== gameStateEnum.BEGIN){
+      button = <Button type="btn-inactive" onClick={this.handleClickPause}>...</Button>;
+    }
     return (
       <div className="App">
         <div className="app-header">
@@ -407,14 +416,14 @@ class App extends Component {
           <LevelDisplay level={this.getLevel()} />
           <ScoreDisplay score={this.state.score} />
           {/*<div className="test-button" onClick={this.handleClickTest6}> ADD BLOCKS</div>*/}
-          <div className="test-button" onClick={gameState===gameStateEnum.PAUSED ? this.onResumeClickHandler : this.onStartClickHandler}> START</div>
-          <div className="test-button" onClick={this.handleClickTest8}> PAUSE</div>
           <KeyInput
             onKeyDown={this.keyDownHandler}
             attachRef={this.handleRefAttachement}
             onBlur={this.handleKeyInputBlur}
           />
           <UpNext tetrimino={this.state.nextTetrimino} />
+          {button}
+
         </div>
       </div>
 
