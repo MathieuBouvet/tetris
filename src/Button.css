@@ -1,6 +1,5 @@
 .button {
 	user-select: none;
-	cursor: pointer;
 
 	height: 10%;
 	font-size: 4vh;
@@ -9,21 +8,29 @@
 	align-items: center;
 	justify-content: center;
 
-	background-color: rgba(var(--app-main-color),1);
+	background-color: rgba(var(--app-main-color),0.95);
 
 	border-radius: 5px;
 
 	box-shadow: 0 0 5px 1px inset rgba(0,0,0,0.5);
+}
+.button:not(.btn-inactive){
+	cursor: pointer;
 
 }
 
-.button:hover {
+.button:hover:not(.btn-inactive) {
 	background-color: rgb(var(--app-main-color));
 	box-shadow: 0 0 5px 1px inset rgba(0,0,0,0.75);
 
 }
 
-.button:active {
+.button:active:not(.btn-inactive) {
 	padding-top: 2px;
 	box-shadow: 0 0 5px 1px inset rgba(0,0,0,1);
+}
+
+.button.btn-inactive {
+	background-color: rgba(34,34,34,0.5);
+	color:#AAA;
 }
