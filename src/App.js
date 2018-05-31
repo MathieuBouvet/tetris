@@ -55,6 +55,10 @@ class App extends Component {
     }
   }
 
+  componentDidMount(){
+    document.documentElement.style.setProperty("--blink-duration",this.getGameSpeed()/2000+"s");
+  }
+
   /** EVENT HANDLERES */
   handleClickPause = (e) =>{
     this.pause();
@@ -151,6 +155,10 @@ class App extends Component {
     return this.state.board.map( (elem) => elem.slice() );
   }
 
+  getGameSpeed(){
+    return 500-(50*(this.getLevel()-1));
+  }
+
   /**
    * Return if the position is valid and give precision if not
    * @param  {array}  position the position of a tetrimino
@@ -216,6 +224,7 @@ class App extends Component {
     if(this.getLevel() !== this.getLevel(newNbLinesCompleted)){
       clearInterval(this.runGame );
       this.runGame = setInterval(this.gravity, 500-(50*(this.getLevel(newNbLinesCompleted)-1)));
+      document.documentElement.style.setProperty("--blink-duration",this.getGameSpeed()/2000+"s");
     }
 
     // Add the linesTODelete to the state, they will be deleted during the next game iteration
