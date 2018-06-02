@@ -402,15 +402,14 @@ class App extends Component {
           <LevelDisplay level={this.getLevel()} />
           <ScoreDisplay score={this.state.score} />
           {/*<div className="test-button" onClick={this.handleClickTest6}> ADD BLOCKS</div>*/}
-          <KeyInput
+          <UpNext tetrimino={this.state.nextTetrimino} />
+          {button}
+        </div>
+        <KeyInput
             onKeyDown={this.keyDownHandler}
             attachRef={this.handleRefAttachement}
             onBlur={this.handleKeyInputBlur}
           />
-          <UpNext tetrimino={this.state.nextTetrimino} />
-          {button}
-        </div>
-        
       </div>
 
     );
