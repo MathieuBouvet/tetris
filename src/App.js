@@ -24,6 +24,7 @@ const gameStateEnum = {
   PAUSED: 2,
   STARTING: 3,
   RESUMING: 4,
+  END: 5,
 }
 
 function createBoard(sizeFirst, sizeSecond) {
@@ -97,6 +98,22 @@ class App extends Component {
     if(this.state.gameState === gameStateEnum.PAUSED){
       this.setState({
         gameState: gameStateEnum.RESUMING,
+      });
+    }
+  }
+  onRestartClickHandler = () => {
+    if(this.state.gameState === gameStateEnum.END){
+      this.tetriminoBag = [];
+      this.tetriminoBag = Tetrimino.getBag();
+      const startingTetrimino = this.getTetriminoFromBag();
+      this.setState({
+        board: createBoard(boardSize.column,boardSize.row),
+        tetrimino: startingTetrimino,
+        nextTetrimino: startingTetrimino,
+        nbLinesCompleted: 0,
+        score: 0,
+        gameState: gameStateEnum.STARTING,
+        linesToDelete: [],
       });
     }
   }
@@ -195,7 +212,7 @@ class App extends Component {
     }catch(err){
       clearInterval(this.runGame);
       this.setState({
-        gameState: gameStateEnum.BEGIN,
+        gameState: gameStateEnum.END,
       });
       let feedback = "mouai -_- recommence ;p";
       if(this.state.score >= 2000 ){
@@ -367,11 +384,17 @@ class App extends Component {
     const { board, tetrimino, gameState } = this.state;
     setTimeout( () =>( this.domRefKeyInput.focus() ),0);
     let button = <Button type="btn-start" onClick={this.onStartClickHandler}> Start </Button>;
+
     if(gameState === gameStateEnum.PAUSED){
       button = <Button type="btn-start" onClick={this.onResumeClickHandler}> Reprendre </Button>;
-    }else if(gameState === gameStateEnum.RUNNING){
+    }
+    else if(gameState === gameStateEnum.RUNNING){
       button = <Button type="btn-pause" onClick={this.handleClickPause}> Pause </Button>;
-    }else if(gameState !== gameStateEnum.BEGIN){
+    }
+    else if(gameState === gameStateEnum.END){
+      button = <Button type="btn-restart" onClick={this.onRestartClickHandler}> Rejouer </Button>
+    }
+    else if(gameState !== gameStateEnum.BEGIN){
       button = <Button type="btn-inactive" onClick={this.handleClickPause}>...</Button>;
     }
     return (
