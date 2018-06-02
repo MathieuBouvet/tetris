@@ -383,7 +383,7 @@ class App extends Component {
   render() {
     const { board, tetrimino, gameState } = this.state;
     setTimeout( () =>( this.domRefKeyInput.focus() ),0);
-    let button = <Button type="btn-start" onClick={this.onStartClickHandler}> Start </Button>;
+    let button = <Button type="btn-start" onClick={this.onStartClickHandler}> Jouer </Button>;
 
     if(gameState === gameStateEnum.PAUSED){
       button = <Button type="btn-start" onClick={this.onResumeClickHandler}> Reprendre </Button>;
