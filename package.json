@@ -1,5 +1,6 @@
 {
   "name": "tetris",
+  "homepage": "http://moalrick.free.fr/tetris-dev",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
