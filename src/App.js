@@ -13,6 +13,7 @@ import Countdown from "./Countdown";
 import Pause from "./Pause";
 import Button from "./Button";
 
+
 const boardSize = {
   row: 10,
   column: 20,
@@ -384,6 +385,15 @@ class App extends Component {
     return this.state.score + this.getLevel()*baseScoringPerLine[nbLines];
   }
 
+  testData = () => {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST","http://192.168.1.95/TetrisHighscoreDataLayer/highscore.php");
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    let data = {"score":5823, "line":85, "name":"Mathieu+=_5lmù-iOP>"};
+    data = JSON.stringify(data);
+    xhttp.send(data);
+  }
+
   render() {
     const { board, tetrimino, gameState } = this.state;
     setTimeout( () =>( this.domRefKeyInput.focus() ),0);
@@ -407,6 +417,7 @@ class App extends Component {
           <div className="app-title">
             <h1>Tetris</h1>
           </div>
+          <div className="test-button" onClick={this.testData}> testData </div>
         </div>
         <div className="board">
           { gameState===gameStateEnum.STARTING && <Countdown onFinish={this.start} /> }
