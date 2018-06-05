@@ -14,3 +14,7 @@
 .score-component:nth-child(n+11){
 	display: none;
 }
+
+.score-component.empty {
+	color: #7d7d7d;
+}

@@ -30,6 +30,19 @@ class Highscores extends Component {
 		xhttp.send();
 	}
 
+	displayHighscores(){
+		let highscores = [];
+		const { highscoresData: hsData } = this.state;
+		for(let i=0 ; i<10 ; i++){
+			if(i >= hsData.length){
+				highscores.push(<Score key={i} empty={true}/>);
+			}else{
+				highscores.push(<Score key={i} name={hsData[i].name} score={hsData[i].score}/>)
+			}
+		}
+		return highscores;
+	}
+
 	render(){
 		return (
 			<div className="highscores-component">
@@ -38,12 +51,11 @@ class Highscores extends Component {
 					<Button type="btn-highscores-close header" onClick={this.props.close}> X </Button>
 				</div>
 				<div className="highscores-body">
-					{this.state.highscoresData === null ? [
+					{this.state.highscoresData === null ? 
 						<Loading />
-					]:this.state.highscoresData.map( (elem,index) => (
-						<Score key={index} score={elem.score} name={elem.name} />
-					))
-				}
+					:
+						this.displayHighscores()
+					}
 				</div>
 				<div className="highscores-footer">
 					<Button type="btn-highscores-close" onClick={this.props.close}> Retour </Button>
