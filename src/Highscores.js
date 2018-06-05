@@ -10,11 +10,21 @@ class Highscores extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			"dataLoaded": false,
+			"highscoresData": null,
 		}
 	}
 	componentDidMount(){
 		let xhttp = new XMLHttpRequest();
+		var thisComponent=this;
+
+		xhttp.onreadystatechange  = function(){
+
+			if (this.readyState == 4 && this.status == 200) {
+				thisComponent.setState({
+					"highscoresData": JSON.parse(this.responseText),
+				});
+			}
+		}
 		xhttp.open("GET","http://192.168.1.95/TetrisHighscoreDataLayer/highscore.php");
 		xhttp.send();
 	}
@@ -27,10 +37,12 @@ class Highscores extends Component {
 					<Button type="btn-highscores-close header" onClick={this.props.close}> X </Button>
 				</div>
 				<div className="highscores-body">
-					{!this.state.dataLoaded ? [
-						<img className="loading-img" src={loading} alt="chargement" />,
-						<div> Chargement </div>
-					]:"plop"
+					{this.state.highscoresData === null ? [
+						<img key="load-img" className="loading-img" src={loading} alt="chargement" />,
+						<div key="load-text"> Chargement </div>
+					]:this.state.highscoresData.map( (elem) => (
+						<div key={elem.hash}> {elem.score} </div>
+					))
 				}
 				</div>
 				<div className="highscores-footer">
