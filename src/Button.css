@@ -34,3 +34,9 @@
 	background-color: rgba(34,34,34,0.5);
 	color:#AAA;
 }
+
+.btn-highscore {
+	height: auto;
+	width: auto;
+	padding: 5px;
+}

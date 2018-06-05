@@ -70,7 +70,7 @@ h1 {
 	height: 100%;
 
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 
 	position: relative;
@@ -135,7 +135,6 @@ h1 {
 }
 
 .test-button {
-	margin-left: 100px;
 	border: 1px solid #222;
 	background-color: #EEE;
 	cursor: pointer;
