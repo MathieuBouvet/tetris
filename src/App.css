@@ -9,7 +9,13 @@
 	--board-row-num: 20;
 
 	--infos-container-width: calc(var(--board-block-size) * var(--board-column-num));
+	--infos-container-height: calc(var(--board-block-size) * var(--board-row-num));
 	--infos-container-padding: 3vh;
+
+	--highscores-height: var(--infos-container-height);
+	--highscores-width: calc(2 * var(--infos-container-width) + var(--main-grid-gap));
+
+	--main-grid-gap: 75px;
 
 }
 h1 {
@@ -24,7 +30,7 @@ h1 {
 												"foot foot";
 
 	grid-template-rows: 15% auto ;
-	grid-column-gap: 75px;
+	grid-column-gap: var(--main-grid-gap);
 	text-align: center;
 	justify-content: stretch;
 	align-content: space-between;
@@ -194,4 +200,8 @@ h1 {
 
 
 	filter: blur(5px);
+}
+
+.hidden {
+	display: none;
 }

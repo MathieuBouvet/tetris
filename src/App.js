@@ -13,6 +13,8 @@ import Countdown from "./Countdown";
 import Pause from "./Pause";
 import Button from "./Button";
 
+import Highscores from "./Highscores";
+
 
 const boardSize = {
   row: 10,
@@ -402,7 +404,7 @@ class App extends Component {
   }
 
   render() {
-    const { board, tetrimino, gameState } = this.state;
+    const { board, tetrimino, gameState, showHighscore } = this.state;
     setTimeout( () =>( this.domRefKeyInput.focus() ),0);
     let button = <Button type="btn-start" onClick={this.onStartClickHandler}> Jouer </Button>;
 
@@ -427,7 +429,7 @@ class App extends Component {
           </div>
           <Button type="btn-highscore" onClick={this.toggleHighscore}> H </Button>
         </div>
-        <div className="board">
+        <div className={`board ${showHighscore?"hidden":""}`}>
           { gameState===gameStateEnum.STARTING && <Countdown onFinish={this.start} /> }
           { gameState===gameStateEnum.RESUMING && <Countdown onFinish={this.run} /> }
           { gameState===gameStateEnum.PAUSED && <Pause /> }
@@ -444,13 +446,14 @@ class App extends Component {
             }
           </div>
         </div>
-        <div className="infos-container">
+        <div className={`infos-container ${showHighscore?"hidden":""}`}>
           <LevelDisplay level={this.getLevel()} />
           <ScoreDisplay score={this.state.score} />
           {/*<div className="test-button" onClick={this.handleClickTest6}> ADD BLOCKS</div>*/}
           <UpNext tetrimino={this.state.nextTetrimino} />
           {button}
         </div>
+        { showHighscore && <Highscores />}
         <KeyInput
             onKeyDown={this.keyDownHandler}
             attachRef={this.handleRefAttachement}
