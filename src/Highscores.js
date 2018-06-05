@@ -3,8 +3,8 @@ import "./Highscores.css";
 
 import Button from "./Button";
 import Score from "./Score";
+import Loading from "./Loading";
 
-import loading from "./loading.gif";
 
 class Highscores extends Component {
 
@@ -39,8 +39,7 @@ class Highscores extends Component {
 				</div>
 				<div className="highscores-body">
 					{this.state.highscoresData === null ? [
-						<img key="load-img" className="loading-img" src={loading} alt="chargement" />,
-						<div key="load-text"> Chargement </div>
+						<Loading />
 					]:this.state.highscoresData.map( (elem,index) => (
 						<Score key={index} score={elem.score} name={elem.name} />
 					))
