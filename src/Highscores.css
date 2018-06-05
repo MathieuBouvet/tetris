@@ -1,0 +1,40 @@
+.highscores-component {
+	grid-column: main-left / main-right;
+	height: var(--highscores-height);
+	width: var(--highscores-width);
+
+	justify-self: center;
+
+	border-radius: 5px;
+
+	position: relative;
+	overflow: hidden;
+}
+.highscores-component > * {
+	position: relative;
+	z-index: 0;
+}
+.highscores-component::before {
+	content: "";
+	position: absolute;
+	top: -25px;
+	left: -25px;
+	bottom: -25px;
+	right: -25px;
+
+	background-image: var(--app-bg) ;
+	background-attachment: fixed;
+	background-size: cover;
+
+	filter: blur(5px);
+
+	box-shadow: inset 0 0 0 300px rgba(255,255,255,0.1);
+}
+
+
+.loading-img {
+	max-width: 25%;
+	max-height: auto;
+
+	z-index: 1000;
+}
