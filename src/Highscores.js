@@ -20,10 +20,17 @@ class Highscores extends Component {
 	render(){
 		return (
 			<div className="highscores-component">
-				{!this.state.dataLoaded && [
-					<img className="loading-img" src={loading} alt="chargement" />,
-					<div> Chargement </div>
-				]}
+				<div className="highscores-header">
+					<div className="highscores-title">Meilleurs Scores</div>
+					<div className="close-highscore-button">X</div>
+				</div>
+				<div className="highscores-body">
+					{!this.state.dataLoaded && [
+						<img className="loading-img" src={loading} alt="chargement" />,
+						<div> Chargement </div>
+					]}
+				</div>
+				<div className="highscores-footer"></div>
 			</div>
 		);
 	}
