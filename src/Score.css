@@ -1,0 +1,12 @@
+.score-component {
+	display: flex;
+	justify-content: space-between;
+
+	font-size: 3vh;
+
+}
+
+.score-component > .dots {
+	flex: 1;
+	border-bottom: 5px dotted;
+}
