@@ -63,9 +63,20 @@
 	justify-content: end;
 }
 
+.highscores-body {
+	flex: 1;
+	padding: 25px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+
+
+}
+
 .loading-img {
 	max-width: 25%;
 	max-height: auto;
-
-	z-index: 1000;
+	
+	align-self: center;
 }
