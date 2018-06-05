@@ -40,3 +40,22 @@
 	width: auto;
 	padding: 5px;
 }
+
+.btn-highscores-close {
+	height: auto;
+	width: auto;
+
+	margin: 10px;
+	padding: 0 10px;
+
+	font-size: 2vh;
+}
+.btn-highscores-close.footer {
+
+}
+.btn-highscores-close.header {
+	background-color: #600000;
+}
+.btn-highscores-close.header:hover {
+	background-color: #3F0000
+}
