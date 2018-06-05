@@ -9,6 +9,11 @@
 .score-component > .dots {
 	flex: 1;
 	border-bottom: 5px dotted;
+
+	margin: 0 5px;
+
+	position: relative;
+	top: -5px;
 }
 
 .score-component:nth-child(n+11){
