@@ -54,6 +54,7 @@ class App extends Component {
       score: 0,
       gameState: gameStateEnum.BEGIN,
       linesToDelete: [],
+      showHighscore: false,
     }
   }
 
@@ -394,6 +395,12 @@ class App extends Component {
     xhttp.send(data);
   }
 
+  toggleHighscore = () => {
+  	this.setState({
+  		showHighscore: !this.state.showHighscore,
+  	});
+  }
+
   render() {
     const { board, tetrimino, gameState } = this.state;
     setTimeout( () =>( this.domRefKeyInput.focus() ),0);
@@ -414,10 +421,11 @@ class App extends Component {
     return (
       <div className="App">
         <div className="app-header">
+          <div className="test-button" onClick={this.testData}> testData </div>
           <div className="app-title">
             <h1>Tetris</h1>
           </div>
-          <div className="test-button" onClick={this.testData}> testData </div>
+          <Button type="btn-highscore" onClick={this.toggleHighscore}> H </Button>
         </div>
         <div className="board">
           { gameState===gameStateEnum.STARTING && <Countdown onFinish={this.start} /> }
