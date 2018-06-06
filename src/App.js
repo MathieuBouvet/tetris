@@ -453,7 +453,7 @@ class App extends Component {
           <UpNext tetrimino={this.state.nextTetrimino} />
           {button}
         </div>
-        { showHighscore && <Highscores close={this.toggleHighscore}/>}
+        { showHighscore && <Highscores close={this.toggleHighscore} endGame={true} newScore={{score:22000, line:254}}/>}
         <KeyInput
             onKeyDown={this.keyDownHandler}
             attachRef={this.handleRefAttachement}
