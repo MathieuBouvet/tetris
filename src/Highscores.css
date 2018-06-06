@@ -53,16 +53,6 @@
 .highscores-title {
 	font-size: 4vh;
 }
-.highscores-footer {
-	height: 10%;
-
-	background-color: rgba(34,34,34,0.2);
-
-
-	display: flex;
-	justify-content: end;
-}
-
 .highscores-body {
 	flex: 1;
 	padding: 25px;
@@ -72,4 +62,13 @@
 	justify-content: space-around;
 
 }
+.highscores-footer {
+	height: 10%;
+
+	background-color: rgba(34,34,34,0.2);
+
+	display: flex;
+	justify-content: end;
+}
+
 
