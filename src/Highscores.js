@@ -13,6 +13,7 @@ class Highscores extends Component {
 		this.state = {
 			"highscoresData": null,
 			"newScoreIndex": -1,
+			"newScoreName": "NEW SCORE",
 		}
 	}
 	componentDidMount(){
@@ -29,9 +30,11 @@ class Highscores extends Component {
 				thisComponent.setState({
 					"highscoresData": JSON.parse(data),
 				}, function () {
-					this.setState({
-						"newScoreIndex": thisComponent.newScoreIsHighscoreAt(),
-					})
+					if(this.props.endGame){
+						this.setState({
+							"newScoreIndex": thisComponent.newScoreIsHighscoreAt(),
+						});
+					}
 				});
 
 			}
@@ -66,14 +69,12 @@ class Highscores extends Component {
 		const { highscoresData: hsData, newScoreIndex } = this.state;
 		for(let i=0 ; i<10 ; i++){
 			if(this.props.endGame && newScoreIndex === i){
-				highscores.push(<Score key={i} name={"NEW SCORE TEST"} score={this.props.newScore.score}/>)
+				highscores.push(<Score key={i} name={this.state.newScoreName} score={this.props.newScore.score}/>)
 			}
-			if(highscores.length < 10){
-				if(i >= hsData.length){
-					highscores.push(<Score key={i+1} empty={true}/>);
-				}else{
-					highscores.push(<Score key={hsData[i].hash} name={hsData[i].name} score={hsData[i].score}/>)
-				}
+			if(i >= hsData.length){
+				highscores.push(<Score key={i+1} empty={true}/>);
+			}else{
+				highscores.push(<Score key={hsData[i].hash} name={hsData[i].name} score={hsData[i].score}/>)
 			}
 		}
 		return highscores;
@@ -81,7 +82,6 @@ class Highscores extends Component {
 
 	render(){
 		const { endGame } = this.props;
-		const saveNewScore = this.shouldSaveNewScore();
 		return (
 			<div className="highscores-component">
 				<div className="highscores-header">
