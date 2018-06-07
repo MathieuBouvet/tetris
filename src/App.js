@@ -372,7 +372,11 @@ class App extends Component {
     this.domRefKeyInput = input;
   }
   handleKeyInputBlur = () => {
-    setTimeout(()=>(this.domRefKeyInput.focus()),0  );
+    setTimeout(()=>{
+      if(!this.state.showHighscore){
+        this.domRefKeyInput.focus();
+      }
+    },0  );
   }
 
   getLevel(nbLines=-1){
@@ -405,7 +409,9 @@ class App extends Component {
 
   render() {
     const { board, tetrimino, gameState, showHighscore } = this.state;
-    setTimeout( () =>( this.domRefKeyInput.focus() ),0);
+    if(!showHighscore){
+      setTimeout( () =>( this.domRefKeyInput.focus() ),0);
+    }
     let button = <Button type="btn-start" onClick={this.onStartClickHandler}> Jouer </Button>;
 
     if(gameState === gameStateEnum.PAUSED){
