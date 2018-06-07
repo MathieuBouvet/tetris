@@ -69,7 +69,7 @@ class Highscores extends Component {
 		const { highscoresData: hsData, newScoreIndex } = this.state;
 		for(let i=0 ; i<10 ; i++){
 			if(this.props.endGame && newScoreIndex === i){
-				highscores.push(<Score key={i} name={this.state.newScoreName} score={this.props.newScore.score}/>)
+				highscores.push(<Score key={i} name={this.state.newScoreName} score={this.props.newScore.score} isNew={true}/>)
 			}
 			if(i >= hsData.length){
 				highscores.push(<Score key={i+1} empty={true}/>);

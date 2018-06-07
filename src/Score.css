@@ -23,3 +23,7 @@
 .score-component.empty {
 	color: #7d7d7d;
 }
+
+.score-component.new {
+	color: #ffeb3b;
+}
