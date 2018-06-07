@@ -5,6 +5,7 @@ import Button from "./Button";
 import Score from "./Score";
 import Loading from "./Loading";
 
+const defaultName = "NOUVEAU SCORE"
 
 class Highscores extends Component {
 
@@ -13,8 +14,11 @@ class Highscores extends Component {
 		this.state = {
 			"highscoresData": null,
 			"newScoreIndex": -1,
-			"newScoreName": "NEW SCORE",
+			"newScoreName": defaultName,
+			"nameHasChanged": false,
 		}
+
+		this.nameInput = React.createRef();
 	}
 	componentDidMount(){
 		let xhttp = new XMLHttpRequest();
@@ -80,6 +84,21 @@ class Highscores extends Component {
 		return highscores;
 	}
 
+	handleNameInput = (e) => {
+		let val = e.target.value;
+		if(!this.state.nameHasChanged){
+			val = val.substr(val.length-1);
+		}
+		this.setState({
+			newScoreName: val,
+			nameHasChanged: true,
+		});
+	}
+
+	handleNameInputBlur = () => {
+		setTimeout(()=>(this.nameInput.current.focus()),0);
+	}
+
 	render(){
 		const { endGame } = this.props;
 		return (
@@ -96,6 +115,9 @@ class Highscores extends Component {
 					}
 				</div>
 				<div className="highscores-footer">
+					{ (this.props.endGame && this.state.newScoreIndex > -1) &&
+						<input ref={this.nameInput} autoFocus className="name-input" value={this.state.newScoreName} onChange={this.handleNameInput} onBlur={this.handleNameInputBlur} />
+					}
 					<Button type="btn-highscores-close" onClick={this.props.close}> Retour </Button>
 				</div>
 			</div>
