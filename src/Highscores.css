@@ -45,7 +45,7 @@
 	
 	height: 10%;
 
-	padding: 0 10px;
+	padding-left: 20px;
 
 	background-color: rgba(34,34,34,0.2);
 
@@ -55,7 +55,7 @@
 }
 .highscores-body {
 	flex: 1;
-	padding: 25px;
+	padding: 25px 25px;
 
 	display: flex;
 	flex-direction: column;
@@ -77,4 +77,13 @@
 	border: none;
 	padding: 0;
 	margin: 0;
+	width: 0;
+}
+.footer-feedback {
+	flex: 1;
+	align-self: center;
+	font-size: 2.5vh;
+}
+.footer-feedback.error {
+	color: #b70000;
 }

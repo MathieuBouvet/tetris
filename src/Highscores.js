@@ -20,6 +20,7 @@ class Highscores extends Component {
 			"nameInputError": false,
 			"postError": false,
 			"loadError": false,
+			"sendingData": false,
 		}
 
 		this.nameInput = React.createRef();
@@ -56,7 +57,6 @@ class Highscores extends Component {
 		xhttp.open("GET",dataLayerURL);
 		xhttp.send();
 
-		// Keeping name input focused
 		
 	}
 
@@ -102,6 +102,33 @@ class Highscores extends Component {
 		return highscores;
 	}
 
+	savingFooter(){
+		let footerFeedback = null;
+		if(this.state.nameInputError){
+			footerFeedback = <div key="footerFeedback" className="footer-feedback error"> Entrez votre nom </div> 
+		}else if(this.state.postError){
+			footerFeedback = <div key="footerFeedback" className="footer-feedback error"> Echec lors de l'envoi des données, réessayer...</div>
+		}else if(this.state.sendingData){
+			footerFeedback = <div key="footerFeedback" className="footer-feedback"> Sauvegarde en cours... </div>
+		}
+		return [
+			<input key="nameInput" ref={this.nameInput} autoFocus className="name-input" value={this.state.newScoreName} onChange={this.handleNameInput} onBlur={this.handleNameInputBlur} />,
+			footerFeedback,
+			<Button key="saveButton" type="btn-highscores-save" onClick={this.saveNewScore}> Sauver </Button>
+		]
+	}
+
+	failedFooter(){
+		return [ 
+			<div key="failed-msg" className="footer-feedback"></div>,
+			this.defaultFooter()
+		]
+	}
+
+	defaultFooter(){
+		return <Button key="footer-default-btn" type="btn-highscores-close" onClick={this.props.close}> Retour </Button>
+	}
+
 	handleNameInputBlur = () => {
 		setTimeout(()=>(this.nameInput.current.focus()),0);
 	}
@@ -115,6 +142,7 @@ class Highscores extends Component {
 		this.setState({
 			newScoreName: val,
 			nameHasChanged: true,
+			nameInputError: false,
 		});
 	}
 
@@ -122,7 +150,7 @@ class Highscores extends Component {
 	saveNewScore = () => {
 		if(this.state.newScoreName === defaultName || this.state.newScoreName === ""){
 			this.setState({ nameInputError: true});
-		}else {
+		}else if(!this.state.sendingData){
 			const newScore = {
 				score: this.props.newScore.score,
 				line: this.props.newScore.line,
@@ -137,6 +165,7 @@ class Highscores extends Component {
 					}else {
 						thisComponent.setState({
 							postError: true,
+							sendingData: false,
 						});
 					}
 				}
@@ -155,7 +184,20 @@ class Highscores extends Component {
 		return (
 			<div className="highscores-component">
 				<div className="highscores-header">
-					<div className="highscores-title">Meilleurs Scores</div>
+					<div className="highscores-title">
+						{
+							this.state.highscoresData === null ?
+								"Chargements des Scores..."
+							:
+								endGame ?
+									this.state.newScoreIndex > -1 ?
+										"BRAVO - Entrez votre nom"
+										:
+										"Score Insuffisant :("
+								:
+								"Meilleurs Scores"
+						}
+					</div>
 					<Button 
 						type="btn-highscores-close header" 
 						onClick={shouldSaveNewScore?this.saveNewScore:this.props.close}
@@ -169,11 +211,13 @@ class Highscores extends Component {
 					}
 				</div>
 				<div className="highscores-footer">
-					{ (shouldSaveNewScore) ?
-						[<input key="nameInput" ref={this.nameInput} autoFocus className="name-input" value={this.state.newScoreName} onChange={this.handleNameInput} onBlur={this.handleNameInputBlur} />,
-						<Button key="saveButton" type="btn-highscores-close" onClick={this.saveNewScore}> Sauver </Button>]
+					{ (endGame) ?
+						this.state.newScoreIndex > -1 ?
+							this.savingFooter()
+							:
+							this.failedFooter()
 						:
-						<Button type="btn-highscores-close" onClick={this.props.close}> Retour </Button>
+						this.defaultFooter()
 					}
 				</div>
 			</div>
