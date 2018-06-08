@@ -59,6 +59,7 @@ class App extends Component {
       linesToDelete: [],
       showHighscore: false,
       showEndGameHighscore: false,
+      showSettings: false,
     }
   }
 
@@ -404,12 +405,15 @@ class App extends Component {
   toggleHighscore = () => {
     this.pause();
   	this.setState({
-  		showHighscore: !this.state.showHighscore,
+  		showHighscore: !this.state.showHighscore||this.state.showEndGameHighscore,
+      showSettings: false,
   	});
   }
   showHighscore = () => {
     if(!this.state.showHighscore){
-      this.pause();
+      if(this.state.gameState === gameStateEnum.RUNNING){
+        this.pause();
+      }
       this.setState({
         showHighscore: true,
       });
@@ -419,6 +423,13 @@ class App extends Component {
     this.setState({
       showHighscore: false,
       showEndGameHighscore: false,
+    });
+  }
+
+  toggleSettings = () => {
+    this.setState({
+      showSettings: !this.state.showSettings,
+      showHighscore: false,
     });
   }
 
@@ -448,7 +459,8 @@ class App extends Component {
           <div className="app-title">
             <h1>Tetris</h1>
           </div>
-          <Button type="btn-highscore" onClick={this.showHighscore}> H </Button>
+          <Button type={`btn-highscore app-header-button ${this.state.showHighscore?"pushed":""}`} onClick={this.toggleHighscore}> <i className="far fa-list-alt fa-2x"></i>  </Button>
+          {/*<Button type={`btn-settings app-header-button ${this.state.showSettings?"pushed":""}`} onClick={this.toggleSettings}><i className="fas fa-cog fa-2x"></i>  </Button>*/}
         </div>
         <div className={`board ${showHighscore?"hidden":""}`}>
           { gameState===gameStateEnum.STARTING && <Countdown onFinish={this.start} /> }

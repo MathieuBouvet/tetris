@@ -104,6 +104,9 @@ h1 {
 	box-shadow: 0 0 0 2000px rgba(255,255,255,0.1) inset;
 
 }
+.app-title {
+	flex: 1;
+}
 
 .board {
 	grid-area: main-left;

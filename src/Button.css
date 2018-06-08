@@ -19,13 +19,13 @@
 
 }
 
-.button:hover:not(.btn-inactive) {
+.button:hover:not(.btn-inactive):not(.app-header-button) {
 	background-color: rgb(var(--app-main-color));
 	box-shadow: 0 0 5px 1px inset rgba(0,0,0,0.75);
 
 }
 
-.button:active:not(.btn-inactive) {
+.button:active:not(.btn-inactive):not(.app-header-button) {
 	padding-top: 2px;
 	box-shadow: 0 0 5px 1px inset rgba(0,0,0,1);
 }
@@ -34,13 +34,39 @@
 	background-color: rgba(34,34,34,0.5);
 	color:#AAA;
 }
+.app-header .button {
+	margin-right: 15px;
+	height: 9vh;
+	width: 9vh;
 
-.btn-highscore {
-	height: auto;
-	width: auto;
-	padding: 5px;
+	border-radius: 50%;
+
+	display: flex;
+	flex-direction: column;
+	/* padding: 5px; */
+
+	font-size: 2vh;
+	background-color: rgb(var(--app-main-color));
+
+	box-shadow: -1px -1px 3px 1px inset rgba(0,0,0,0.75),
+								1px 1px 5px 1px inset rgba(50,50,50,1);
+
+
+
+
 }
+.app-header .button.pushed {
+	padding-top: 5px;
+	font-size: 1.98vh;
+	background-color: #181818;
 
+	box-shadow: none;
+
+	color: #EEE;
+	text-shadow: none;
+
+
+}
 .btn-highscores-close {
 	height: auto;
 	width: auto;
