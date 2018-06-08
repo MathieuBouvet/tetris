@@ -89,20 +89,22 @@ class Highscores extends Component {
 		return highscores;
 	}
 
+	handleNameInputBlur = () => {
+		setTimeout(()=>(this.nameInput.current.focus()),0);
+	}
 	handleNameInput = (e) => {
 		let val = e.target.value;
 		if(!this.state.nameHasChanged){
 			val = val.substr(val.length-1);
 		}
+		val = val.replace(/[^a-z-_àéèùçëï]/i,"");
+		val = val.toUpperCase();
 		this.setState({
 			newScoreName: val,
 			nameHasChanged: true,
 		});
 	}
 
-	handleNameInputBlur = () => {
-		setTimeout(()=>(this.nameInput.current.focus()),0);
-	}
 
 	saveNewScore = () => {
 		if(this.state.newScoreName === defaultName || this.state.newScoreName === ""){
