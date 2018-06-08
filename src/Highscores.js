@@ -17,6 +17,8 @@ class Highscores extends Component {
 			"newScoreIndex": -1,
 			"newScoreName": defaultName,
 			"nameHasChanged": false,
+			"nameInputError": false,
+			"postError": false,
 		}
 
 		this.nameInput = React.createRef();
@@ -56,14 +58,16 @@ class Highscores extends Component {
 	newScoreIsHighscoreAt(){
 		const { highscoresData: hsd } = this.state;
 		const newScore = this.props.newScore;
-		for(let i=0 ; i<hsd.length ; i++){
+		if(newScore !== null){
+			for(let i=0 ; i<hsd.length ; i++){
 
-			if(newScore.score > hsd[i].score || (newScore.score == hsd[i].score && newScore.line > hsd[i].line)){
-				return i;
+				if(newScore.score > hsd[i].score || (newScore.score == hsd[i].score && newScore.line >= hsd[i].line)){
+					return i;
+				}
 			}
-		}
-		if( hsd.length < 10){
-			return hsd.length;
+			if( hsd.length < 10){
+				return hsd.length;
+			}
 		}
 		return -1;
 		
@@ -100,6 +104,36 @@ class Highscores extends Component {
 		setTimeout(()=>(this.nameInput.current.focus()),0);
 	}
 
+	saveNewScore = () => {
+		if(this.state.newScoreName === defaultName || this.state.newScoreName === ""){
+			this.setState({ nameInputError: true});
+		}else {
+			const newScore = {
+				score: this.props.newScore.score,
+				line: this.props.newScore.line,
+				name: this.state.newScoreName,
+			}
+			let xhttp = new XMLHttpRequest();
+			let thisComponent = this;
+			xhttp.onreadystatechange = function(){
+				if(this.readyState === 4 ){
+					if(this.status === 200){
+						thisComponent.props.close();
+					}else {
+						thisComponent.setState({
+							postError: true,
+						});
+					}
+				}
+			}
+			xhttp.open("POST",dataLayerURL);
+			xhttp.setRequestHeader("Content-Type","application/json");
+			xhttp.send(JSON.stringify(newScore));
+		}
+		
+
+	}
+
 	render(){
 		const { endGame } = this.props;
 		return (
@@ -116,14 +150,17 @@ class Highscores extends Component {
 					}
 				</div>
 				<div className="highscores-footer">
-					{ (this.props.endGame && this.state.newScoreIndex > -1) &&
-						<input ref={this.nameInput} autoFocus className="name-input" value={this.state.newScoreName} onChange={this.handleNameInput} onBlur={this.handleNameInputBlur} />
+					{ (this.props.endGame && this.state.newScoreIndex > -1) ?
+						[<input key="nameInput" ref={this.nameInput} autoFocus className="name-input" value={this.state.newScoreName} onChange={this.handleNameInput} onBlur={this.handleNameInputBlur} />,
+						<Button key="saveButton" type="btn-highscores-close" onClick={this.saveNewScore}> Sauver </Button>]
+						:
+						<Button type="btn-highscores-close" onClick={this.props.close}> Retour </Button>
 					}
-					<Button type="btn-highscores-close" onClick={this.props.close}> Retour </Button>
 				</div>
 			</div>
 		);
 	}
 }
+Highscores.defaultProps = {newScore: null};
 
 export default Highscores;
