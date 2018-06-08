@@ -401,15 +401,6 @@ class App extends Component {
     return this.state.score + this.getLevel()*baseScoringPerLine[nbLines];
   }
 
-  testData = () => {
-    let xhttp = new XMLHttpRequest();
-    xhttp.open("POST","http://192.168.1.95/TetrisHighscoreDataLayer/highscore.php");
-    xhttp.setRequestHeader("Content-Type", "application/json");
-    let data = {"score":5823, "line":85, "name":"Mathieu+=_5lmù-iOP>"};
-    data = JSON.stringify(data);
-    xhttp.send(data);
-  }
-
   toggleHighscore = () => {
     this.pause();
   	this.setState({
@@ -454,7 +445,6 @@ class App extends Component {
     return (
       <div className="App">
         <div className="app-header">
-          <div className="test-button" onClick={this.testData}> testData </div>
           <div className="app-title">
             <h1>Tetris</h1>
           </div>
