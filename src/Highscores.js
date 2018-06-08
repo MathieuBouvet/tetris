@@ -5,7 +5,8 @@ import Button from "./Button";
 import Score from "./Score";
 import Loading from "./Loading";
 
-const defaultName = "NOUVEAU SCORE"
+const defaultName = "NOUVEAU SCORE";
+const dataLayerURL = "http://192.168.1.95/TetrisHighscoreDataLayer/highscore.php";
 
 class Highscores extends Component {
 
@@ -43,7 +44,7 @@ class Highscores extends Component {
 
 			}
 		}
-		xhttp.open("GET","http://192.168.1.95/TetrisHighscoreDataLayer/highscore.php");
+		xhttp.open("GET",dataLayerURL);
 		xhttp.send();
 	}
 
