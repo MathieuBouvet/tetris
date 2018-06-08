@@ -12,6 +12,7 @@ import LevelDisplay from "./LevelDisplay";
 import Countdown from "./Countdown";
 import Pause from "./Pause";
 import Button from "./Button";
+import GameOver from "./GameOver";
 
 import Highscores from "./Highscores";
 
@@ -57,6 +58,7 @@ class App extends Component {
       gameState: gameStateEnum.BEGIN,
       linesToDelete: [],
       showHighscore: false,
+      showEndGameHighscore: false,
     }
   }
 
@@ -221,7 +223,7 @@ class App extends Component {
       this.setState({
         gameState: gameStateEnum.END,
       });
-      let feedback = "mouai -_- recommence ;p";
+      /*let feedback = "mouai -_- recommence ;p";
       if(this.state.score >= 2000 ){
         feedback = "pas mal, mais tu peux mieux faire Natty... ¯\\_(ツ)_/¯";
       }
@@ -237,7 +239,15 @@ class App extends Component {
       if(this.state.score >= 15000){
         feedback = " \\ (•◡•) / \nHooray \n\\ (•◡•) /\nMagnifique\n \\ (•◡•) / \nParfait\n \\ (•◡•) / \nNATTY !!!!";
       }
-      alert("perdu \n score : "+this.state.score+" "+feedback);
+      alert("perdu \n score : "+this.state.score+" "+feedback);*/
+      setTimeout(() => {
+        if(!this.state.showHighscore){
+          this.setState({
+            showEndGameHighscore: true,
+            showHighscore: true,
+          });
+        }
+      },2000)
       return;
     }
 
@@ -401,10 +411,26 @@ class App extends Component {
   }
 
   toggleHighscore = () => {
+    this.pause();
   	this.setState({
   		showHighscore: !this.state.showHighscore,
   	});
   }
+  showHighscore = () => {
+    if(!this.state.showHighscore){
+      this.pause();
+      this.setState({
+        showHighscore: true,
+      });
+    }
+  }
+  closeHighscore = () => {
+    this.setState({
+      showHighscore: false,
+      showEndGameHighscore: false,
+    });
+  }
+
 
   render() {
     const { board, tetrimino, gameState, showHighscore } = this.state;
@@ -432,12 +458,13 @@ class App extends Component {
           <div className="app-title">
             <h1>Tetris</h1>
           </div>
-          <Button type="btn-highscore" onClick={this.toggleHighscore}> H </Button>
+          <Button type="btn-highscore" onClick={this.showHighscore}> H </Button>
         </div>
         <div className={`board ${showHighscore?"hidden":""}`}>
           { gameState===gameStateEnum.STARTING && <Countdown onFinish={this.start} /> }
           { gameState===gameStateEnum.RESUMING && <Countdown onFinish={this.run} /> }
           { gameState===gameStateEnum.PAUSED && <Pause /> }
+          { gameState===gameStateEnum.END && <GameOver /> }
           <div className={`cell-wrapper ${gameState===gameStateEnum.PAUSED ? "blured" : ""}`}>
             {
               board.map( (row, rowIndex) => (
@@ -458,7 +485,16 @@ class App extends Component {
           <UpNext tetrimino={this.state.nextTetrimino} />
           {button}
         </div>
-        { showHighscore && <Highscores close={this.toggleHighscore} endGame={true} newScore={{score:22000, line:254}}/>}
+        { showHighscore && 
+          <Highscores 
+            close={this.closeHighscore} 
+            endGame={gameState===gameStateEnum.END} 
+            newScore={this.state.showEndGameHighscore?{
+              score: this.state.score,
+              line: this.state.lines,
+            }:null}
+          />
+        }
         <KeyInput
             onKeyDown={this.keyDownHandler}
             attachRef={this.handleRefAttachement}

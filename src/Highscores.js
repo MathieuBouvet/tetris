@@ -105,7 +105,7 @@ class Highscores extends Component {
 	savingFooter(){
 		let footerFeedback = null;
 		if(this.state.nameInputError){
-			footerFeedback = <div key="footerFeedback" className="footer-feedback error"> Entrez votre nom </div> 
+			footerFeedback = <div key="footerFeedback" className="footer-feedback error"> Entrez votre nom à l'aide du clavier</div> 
 		}else if(this.state.postError){
 			footerFeedback = <div key="footerFeedback" className="footer-feedback error"> Echec lors de l'envoi des données, réessayer...</div>
 		}else if(this.state.sendingData){
