@@ -73,10 +73,9 @@ class App extends Component {
       switch(event.key){
       case "ArrowDown":
         this.moveDown();
-        const { score } = this.state;
-        this.setState({
-          score: score+1,
-        });
+        this.setState((prevState) => ({
+          score: prevState.score+1,
+        }));
         break;
       case "ArrowLeft":
         this.moveLeft();
