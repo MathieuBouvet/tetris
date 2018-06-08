@@ -19,6 +19,7 @@ class Highscores extends Component {
 			"nameHasChanged": false,
 			"nameInputError": false,
 			"postError": false,
+			"loadError": false,
 		}
 
 		this.nameInput = React.createRef();
@@ -37,9 +38,15 @@ class Highscores extends Component {
 				thisComponent.setState({
 					"highscoresData": JSON.parse(data),
 				}, function () {
-					if(this.props.endGame){
-						this.setState({
-							"newScoreIndex": thisComponent.newScoreIsHighscoreAt(),
+					if(thisComponent.props.endGame){
+						const scoreAt = thisComponent.newScoreIsHighscoreAt();
+						if(scoreAt > -1){
+							thisComponent.keepFocusing = setInterval(function(){
+								thisComponent.nameInput.current.focus();
+							},500)
+						}
+						thisComponent.setState({
+							"newScoreIndex": scoreAt,
 						});
 					}
 				});
@@ -48,8 +55,14 @@ class Highscores extends Component {
 		}
 		xhttp.open("GET",dataLayerURL);
 		xhttp.send();
+
+		// Keeping name input focused
+		
 	}
 
+	componentWillUnmount(){
+		clearInterval(this.keepFocusing);
+	}
 
 	/**
 	 * Return the index of the new score in the highscores array, or -1 if not in the top 10
@@ -138,11 +151,15 @@ class Highscores extends Component {
 
 	render(){
 		const { endGame } = this.props;
+		const shouldSaveNewScore = endGame && this.state.newScoreIndex > -1;
 		return (
 			<div className="highscores-component">
 				<div className="highscores-header">
 					<div className="highscores-title">Meilleurs Scores</div>
-					<Button type="btn-highscores-close header" onClick={this.props.close}> X </Button>
+					<Button 
+						type="btn-highscores-close header" 
+						onClick={shouldSaveNewScore?this.saveNewScore:this.props.close}
+						> X </Button>
 				</div>
 				<div className="highscores-body">
 					{this.state.highscoresData === null ? 
@@ -152,7 +169,7 @@ class Highscores extends Component {
 					}
 				</div>
 				<div className="highscores-footer">
-					{ (this.props.endGame && this.state.newScoreIndex > -1) ?
+					{ (shouldSaveNewScore) ?
 						[<input key="nameInput" ref={this.nameInput} autoFocus className="name-input" value={this.state.newScoreName} onChange={this.handleNameInput} onBlur={this.handleNameInputBlur} />,
 						<Button key="saveButton" type="btn-highscores-close" onClick={this.saveNewScore}> Sauver </Button>]
 						:
