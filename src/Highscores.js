@@ -5,8 +5,8 @@ import Button from "./Button";
 import Score from "./Score";
 import Loading from "./Loading";
 
-const devUrl = "http://moalrick.free.fr/tetris-beta/TetrisHighscoreDataLayer/highscore.php";
-const prodUrl = "http://195.168.1.95/TetrisHighscoreDataLayer/highscore.php";
+const prodUrl = "http://moalrick.free.fr/tetris-beta/TetrisHighscoreDataLayer/highscore.php";
+const devUrl = "http://195.168.1.95/TetrisHighscoreDataLayer/highscore.php";
 
 
 const defaultName = "NOUVEAU SCORE";

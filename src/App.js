@@ -493,7 +493,7 @@ class App extends Component {
             endGame={gameState===gameStateEnum.END} 
             newScore={this.state.showEndGameHighscore?{
               score: this.state.score,
-              line: this.state.lines,
+              line: this.state.nbLinesCompleted,
             }:null}
           />
         }
