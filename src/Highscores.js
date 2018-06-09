@@ -5,8 +5,12 @@ import Button from "./Button";
 import Score from "./Score";
 import Loading from "./Loading";
 
+const devUrl = "http://moalrick.free.fr/tetris-beta/TetrisHighscoreDataLayer/highscore.php";
+const prodUrl = "http://195.168.1.95/TetrisHighscoreDataLayer/highscore.php";
+
+
 const defaultName = "NOUVEAU SCORE";
-const dataLayerURL = "http://192.168.1.95/TetrisHighscoreDataLayer/highscore.php";
+const dataLayerURL = devUrl;
 
 class Highscores extends Component {
 
@@ -178,6 +182,21 @@ class Highscores extends Component {
 
 	}
 
+	highscoresTitle() {
+		const { newScoreIndex, newScore, highscoresData } = this.state;
+		if(highscoresData === null){
+			return "Chargements des Scores...";
+		}
+		if(newScore != null){
+			if(newScoreIndex > -1){
+				return "BRAVO - Entrez votre nom";
+			}else {
+				return "Score Insuffisant :(";
+			}
+		}
+		return "Meilleurs Scores";
+	}
+
 	render(){
 		const { endGame } = this.props;
 		const shouldSaveNewScore = endGame && this.state.newScoreIndex > -1;
@@ -185,18 +204,7 @@ class Highscores extends Component {
 			<div className="highscores-component">
 				<div className="highscores-header">
 					<div className="highscores-title">
-						{
-							this.state.highscoresData === null ?
-								"Chargements des Scores..."
-							:
-								endGame ?
-									this.state.newScoreIndex > -1 ?
-										"BRAVO - Entrez votre nom"
-										:
-										"Score Insuffisant :("
-								:
-								"Meilleurs Scores"
-						}
+						{ this.highscoresTitle() }
 					</div>
 					<Button 
 						type="btn-highscores-close header" 
