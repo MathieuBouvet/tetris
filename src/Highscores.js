@@ -5,12 +5,14 @@ import Button from "./Button";
 import Score from "./Score";
 import Loading from "./Loading";
 
-const prodUrl = "http://moalrick.free.fr/tetris-beta/TetrisHighscoreDataLayer/highscore.php";
-const devUrl = "http://195.168.1.95/TetrisHighscoreDataLayer/highscore.php";
 
-
+let dataLayerURL = "http://localhost/TetrisHighscoreDataLayer/highscore.php";
+if(process.env.NODE_ENV === "production"){
+	dataLayerURL = "http://moalrick.free.fr/tetris-beta/TetrisHighscoreDataLayer/highscore.php";
+}
+console.log(dataLayerURL);
 const defaultName = "NOUVEAU SCORE";
-const dataLayerURL = devUrl;
+
 
 class Highscores extends Component {
 
