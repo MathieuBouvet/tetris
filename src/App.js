@@ -16,6 +16,8 @@ import GameOver from "./GameOver";
 
 import Highscores from "./Highscores";
 
+import tetrisAudio from "./tetris_theme_song.mp3";
+
 
 const boardSize = {
   row: 10,
@@ -459,6 +461,9 @@ class App extends Component {
           <div className="app-title">
             <h1>Tetris</h1>
           </div>
+          <audio>
+            <source src={tetrisAudio} type="audio/mp3"/>
+          </audio>
           <Button type={`btn-highscore app-header-button ${this.state.showHighscore?"pushed":""}`} onClick={this.toggleHighscore}> <i className="far fa-list-alt fa-2x"></i>  </Button>
           {/*<Button type={`btn-settings app-header-button ${this.state.showSettings?"pushed":""}`} onClick={this.toggleSettings}><i className="fas fa-cog fa-2x"></i>  </Button>*/}
         </div>
