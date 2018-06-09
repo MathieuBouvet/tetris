@@ -62,7 +62,10 @@ class App extends Component {
       showHighscore: false,
       showEndGameHighscore: false,
       showSettings: false,
+      playMusic: false,
     }
+
+    this.musicPlayer = React.createRef();
   }
 
   componentDidMount(){
@@ -435,6 +438,18 @@ class App extends Component {
     });
   }
 
+  togglePlayMusic = () => {
+    if(this.state.playMusic){
+      this.musicPlayer.current.pause();
+    }else {
+      this.musicPlayer.current.play();
+    }
+    this.setState({
+      playMusic: !this.state.playMusic,
+    });
+
+  }
+
 
   render() {
     const { board, tetrimino, gameState, showHighscore } = this.state;
@@ -461,10 +476,16 @@ class App extends Component {
           <div className="app-title">
             <h1>Tetris</h1>
           </div>
-          <audio>
-            <source src={tetrisAudio} type="audio/mp3"/>
-          </audio>
-          <Button type={`btn-highscore app-header-button ${this.state.showHighscore?"pushed":""}`} onClick={this.toggleHighscore}> <i className="far fa-list-alt fa-2x"></i>  </Button>
+          <Button 
+            type={`btn-highscore app-header-button ${this.state.showHighscore?"pushed":""}`} 
+            onClick={this.toggleHighscore}>
+              <i className="far fa-list-alt "></i>
+          </Button>
+          <Button 
+            type={`btn-audio app-header-button ${this.state.playMusic?"pushed":""}`} 
+            onClick={this.togglePlayMusic}>
+              <i className="fas fa-music"></i>
+          </Button>
           {/*<Button type={`btn-settings app-header-button ${this.state.showSettings?"pushed":""}`} onClick={this.toggleSettings}><i className="fas fa-cog fa-2x"></i>  </Button>*/}
         </div>
         <div className={`board ${showHighscore?"hidden":""}`}>
@@ -507,6 +528,9 @@ class App extends Component {
             attachRef={this.handleRefAttachement}
             onBlur={this.handleKeyInputBlur}
           />
+        <audio ref={this.musicPlayer} loop >
+          <source src={tetrisAudio} type="audio/mp3"/>
+        </audio>
       </div>
 
     );
