@@ -174,7 +174,7 @@ h1 {
 	/* height: calc(20*3.5vh); */
 	width: var(--infos-container-width);
 	/* background-color: #EEE; */
-	color: #DDD;
+	color: #eee;
 
 	border-radius: 6px;
 	background-clip: content-box;
