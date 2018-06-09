@@ -1,6 +1,6 @@
 {
   "name": "tetris",
-  "homepage": "http://moalrick.free.fr/tetris-dev",
+  "homepage": "http://moalrick.free.fr/tetris-beta",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
