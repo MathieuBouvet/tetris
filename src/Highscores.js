@@ -6,11 +6,7 @@ import Score from "./Score";
 import Loading from "./Loading";
 
 
-let dataLayerURL = "http://localhost/TetrisHighscoreDataLayer/highscore.php";
-if(process.env.NODE_ENV === "production"){
-	dataLayerURL = "http://moalrick.free.fr/tetris-beta/TetrisHighscoreDataLayer/highscore.php";
-}
-console.log(dataLayerURL);
+const dataLayerURL = "http://moalrick.free.fr/tetris-beta/TetrisHighscoreDataLayer/highscore.php";
 const defaultName = "NOUVEAU SCORE";
 
 
