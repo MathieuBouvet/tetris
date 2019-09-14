@@ -6,7 +6,9 @@ import Score from "./Score";
 import Loading from "./Loading";
 
 
-const dataLayerURL = "http://moalrick.free.fr/tetris-beta/TetrisHighscoreDataLayer/highscore.php";
+//const dataLayerURL = "http://moalrick.free.fr/tetris-beta/TetrisHighscoreDataLayer/highscore.php";
+const dataLayerURL = ".netlify/functions/hello";
+
 const defaultName = "NOUVEAU SCORE";
 
 
