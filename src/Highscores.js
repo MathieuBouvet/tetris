@@ -176,7 +176,7 @@ class Highscores extends Component {
 				}
 			}
 			xhttp.open("POST",dataLayerURL);
-			xhttp.setRequestHeader("Content-Type","application/json");
+			xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 			xhttp.send(JSON.stringify(newScore));
 		}
 		
